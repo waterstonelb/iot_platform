@@ -1,0 +1,16 @@
+
+spring:
+  application:
+    name: iot-eureka
+
+server:
+  host: http://localhost
+  port: 9990
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+      defaultZone: ${server.host}:${server.port}/eureka/
+  instance:
+    prefer-ip-address: true

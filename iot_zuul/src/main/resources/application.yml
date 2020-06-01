@@ -1,0 +1,57 @@
+
+server:
+  port: 9996
+spring:
+  application:
+    name: iot-zuul
+  redis:
+    host: 101.200.189.184
+    port: 6379
+    password: 123456
+
+zuul:
+  routes:
+    feign-manager:
+      path: /manager/**
+      serviceId: iot-manager
+      strip-prefix: true
+      custom-sensitive-headers: true
+    feign-driver:
+      path: /driver/**
+      serviceId: iot-driver
+      strip-prefix: true
+      custom-sensitive-headers: true
+    feign-data:
+      path: /data/**
+      serviceId: iot-data
+      strip-prefix: true
+      custom-sensitive-headers: true
+    feign-rule:
+      path: /rule/**
+      serviceId: iot-rule
+      strip-prefix: true
+      custom-sensitive-headers: true
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9990/eureka/
+  instance:
+    prefer-ip-address: true
+
+logging:
+  level:
+    ROOT: info
+    org.springframework.web: info
+
+ribbon:
+  ReadTimeout: 6000000
+  SocketTimeout: 6000000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 600000

@@ -1,0 +1,23 @@
+
+
+server:
+  port: 8083
+spring:
+  application:
+    name: iot-data
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/iot
+    username: iot
+    password: 123456
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9990/eureka/
+  instance:
+    prefer-ip-address: true
