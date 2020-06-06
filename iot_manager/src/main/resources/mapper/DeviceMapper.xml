@@ -8,10 +8,11 @@
 
   <!--resultMap – 是最复杂也是最强大的元素，用来描述如何从数据库结果集中来加载对象-->
   <resultMap id="deviceResultMap" type="com.example.iot_manager.data.Device">
-    <id column="id" property="id"></id>
+    <id column="device_id" property="id"></id>
     <result column="model_id" property="modelId"></result>
     <result column="group_id" property="groupId"></result>
     <result column="device_name" property="deviceName"></result>
+    <result column="
     <result column="device_status" property="deviceStatus"></result>
     <result column="survive_time" property="surviveTime"></result>
     <result column="start_time" property="startTime"></result>
