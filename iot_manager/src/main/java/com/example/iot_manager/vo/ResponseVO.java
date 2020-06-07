@@ -9,10 +9,10 @@ import java.io.Serializable;
 public class ResponseVO<T> implements Serializable {
 
     @ApiModelProperty("状态码 0失败，1成功")
-    private Integer code;
+    private final Integer code;
 
     @ApiModelProperty("返回信息")
-    private String message;
+    private final String message;
 
     @ApiModelProperty("返回数据")
     private T data;

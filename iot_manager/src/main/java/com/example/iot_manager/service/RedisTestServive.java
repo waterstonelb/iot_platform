@@ -13,12 +13,6 @@ public class RedisTestServive {
   @Autowired
   StringRedisTemplate stringRedisTemplate;
 
-  public String set(){
-    DeviceDo device=new DeviceDo(
-        1,2,3,"iPad",0,"http","mzl的ipad",new Date(),new Date(),new Date());
-    stringRedisTemplate.opsForValue().set("123", JSON.toJSONString(device));
-    String deviceStr=stringRedisTemplate.opsForValue().get("123");
-    return Objects.requireNonNull(JSON.parseObject(deviceStr, DeviceDo.class)).getDeviceName();
-  }
+
 
 }

@@ -8,11 +8,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ManagerController {
 
-    @Autowired
-    RedisTestServive redisTestServive;
 
-    @GetMapping("/test")
-    public String test(){
-        return redisTestServive.set();
-    }
 }

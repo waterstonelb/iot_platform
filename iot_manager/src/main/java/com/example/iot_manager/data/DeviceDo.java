@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
+import com.example.iot_manager.vo.DeviceVO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,17 +17,38 @@ import lombok.NoArgsConstructor;
 @Table(name = "manager_device")
 public class DeviceDo implements Serializable {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int deviceId;
-  private int modelId;
-  private int groupId;
-  private String deviceName;
-  private int deviceStatus;
-  private String protocol;
-  private String deviceDescription;
-  private Date createTime;
-  private Date updateTime;
-  private Date onlineTime;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int deviceId;
+
+    private int modelId;
+
+    private int groupId = -1;
+
+    private String deviceName;
+
+    private int deviceStatus = 0;
+
+    private int isOnline = 0;
+
+    private String protocol;
+
+    private String deviceDescription;
+
+    @Column(name = "create_time", insertable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private Date createTime;
+
+    @Column(name = "update_time", insertable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    private Date updateTime;
+
+    private Date onlineTime;
+
+    public DeviceDo(DeviceVO deviceVO) {
+        this.modelId = deviceVO.getModelId();
+        this.groupId = deviceVO.getGroupId();
+        this.deviceName = deviceVO.getDeviceName();
+        this.protocol = deviceVO.getProtocol();
+        this.deviceDescription = deviceVO.getDeviceDescription();
+    }
 
 }
