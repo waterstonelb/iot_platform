@@ -4,6 +4,7 @@ import com.example.iot_manager.data.ModelDo;
 import com.example.iot_manager.service.ModelService;
 import com.example.iot_manager.vo.ModelVO;
 import com.example.iot_manager.vo.ResponseVO;
+import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,26 +27,31 @@ public class ModelController {
     this.modelService = modelService;
   }
 
+  @ApiOperation("添加模型")
   @PostMapping("/add")
   public ResponseVO<String> addModel(@RequestBody ModelVO modelVO){
     return modelService.addModel(modelVO);
   }
 
+  @ApiOperation("更新模型")
   @PostMapping("/update")
   public ResponseVO<String> updateModel(@RequestParam int modelId, @RequestBody ModelVO modelVO){
     return modelService.updateModel(modelId, modelVO);
   }
 
+  @ApiOperation("删除模型")
   @DeleteMapping("/delete")
   public ResponseVO<String> deleteModel(int modelId){
     return modelService.deleteModel(modelId);
   }
 
+  @ApiOperation("获取全部组")
   @GetMapping("/getall")
   public ResponseVO<List<ModelDo>> getAllModel(int page, int size){
     return modelService.findAllModel(page, size);
   }
 
+  @ApiOperation("根据modelId获取模型")
   @GetMapping("/get")
   public ResponseVO<ModelDo> getModel(int modelId){
     return modelService.findModel(modelId);
