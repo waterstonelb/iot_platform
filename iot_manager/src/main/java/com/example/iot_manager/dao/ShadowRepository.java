@@ -9,5 +9,7 @@ public interface ShadowRepository extends JpaRepository<ShadowDo, Integer> {
 
     ShadowDo findByShadowId(int id);
 
+    ShadowDo findByDeviceId(int deviceId);
+
     void deleteByShadowId(int id);
 }

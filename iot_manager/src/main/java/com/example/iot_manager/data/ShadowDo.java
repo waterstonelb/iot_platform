@@ -1,5 +1,6 @@
 package com.example.iot_manager.data;
 
+import com.example.iot_manager.vo.ShadowVO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,8 @@ public class ShadowDo implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int shadowId;
 
+    private int deviceId;
+
     private String metaData;
 
     private String report;
@@ -30,5 +33,17 @@ public class ShadowDo implements Serializable {
     private Date updateTime;
 
     private Date repTime;
+
+    public void updateVersion(){
+        this.version++;
+    }
+
+    public ShadowDo(ShadowVO shadowVO){
+        this.deviceId=shadowVO.getDeviceId();
+        this.metaData=shadowVO.getMetaData();
+        this.report=shadowVO.getReport();
+        this.version=1;
+        this.repTime=new Date();
+    }
 
 }

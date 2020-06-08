@@ -5,6 +5,7 @@ import com.example.iot_manager.data.GroupDo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -16,5 +17,6 @@ public interface GroupRepository extends JpaRepository<GroupDo, Integer> {
 
     GroupDo findByGroupId(int id);
 
+    @Modifying
     void deleteByGroupId(int id);
 }

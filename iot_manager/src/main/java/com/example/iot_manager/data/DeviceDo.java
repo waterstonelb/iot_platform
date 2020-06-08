@@ -17,38 +17,38 @@ import lombok.NoArgsConstructor;
 @Table(name = "manager_device")
 public class DeviceDo implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int deviceId;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int deviceId;
 
-    private int modelId;
+  private int modelId;
 
-    private int groupId = -1;
+  private int groupId = -1;
 
-    private String deviceName;
+  private String deviceName;
 
-    private int deviceStatus = 0;
+  private int deviceStatus = 0;
 
-    private int isOnline = 0;
+  private int isOnline = 0;
 
-    private String protocol;
+  private String protocol;
 
-    private String deviceDescription;
+  private String deviceDescription;
 
-    @Column(name = "create_time", insertable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Date createTime;
+  @Column(name = "create_time", insertable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+  private Date createTime;
 
-    @Column(name = "update_time", insertable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
-    private Date updateTime;
+  @Column(name = "update_time", insertable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+  private Date updateTime;
 
-    private Date onlineTime;
+  private Date onlineTime;
 
-    public DeviceDo(DeviceVO deviceVO) {
-        this.modelId = deviceVO.getModelId();
-        this.groupId = deviceVO.getGroupId();
-        this.deviceName = deviceVO.getDeviceName();
-        this.protocol = deviceVO.getProtocol();
-        this.deviceDescription = deviceVO.getDeviceDescription();
-    }
+  public void setDeviceVO(DeviceVO deviceVO) {
+    this.deviceName = deviceVO.getDeviceName();
+    this.deviceDescription = deviceVO.getDeviceDescription();
+    this.protocol = deviceVO.getProtocol();
+    this.modelId = deviceVO.getModelId();
+    this.groupId = deviceVO.getGroupId();
+  }
 
 }
