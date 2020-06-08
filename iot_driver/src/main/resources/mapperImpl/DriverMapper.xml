@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.iot_driver.data.DriverMapper">
+
+    <insert id="addConnect" parameterType="com.example.iot_driver.vo.DeviceConnectInfo">
+        insert into connectInfo(device_id,qos,upload_msg_type,issue_msg_type,status)
+        values (
+                #{deviceId},
+                #{qos},
+                #{uploadMessageType},
+                #{sentMessageType},
+                0
+               )
+    </insert>
+
+    <update id="modifyConnectInfo" parameterType="com.example.iot_driver.vo.DeviceConnectInfo">
+        update connectInfo
+        set
+            qos = #{qos},
+            upload_msg_type = #{uploadMessageType},
+            issue_msg_type = #{sentMessageType}
+        where
+            device_id = #{deviceId}
+    </update>
+
+    <select id="getConnectInfo" parameterType="java.lang.String" resultMap="connectInfo">
+        select * from connectInfo where device_id = #{deviceId}
+    </select>
+
+    <select id="getQosById" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select qos from connectInfo where device_id=#{deviceId}
+    </select>
+
+    <update id="updateStatus">
+        update connectInfo
+        set `status` = #{status}
+        where device_id = #{deviceId}
+    </update>
+
+    <select id="getStatus" parameterType="java.lang.String" resultType="int">
+        select `status` from connectInfo where device_id = #{deviceId}
+    </select>
+
+    <select id="getStatusAndQos" parameterType="java.lang.String" resultMap="statusAndQos">
+        select status,qos from connectInfo
+        where device_id = #{deviceId}
+    </select>
+
+    <resultMap id="statusAndQos" type="HashMap">
+        <result column="qos" property="qos" javaType="java.lang.Integer"></result>
+        <result column="status" property="status" javaType="java.lang.Integer"></result>
+    </resultMap>
+
+    <resultMap id="connectInfo" type="com.example.iot_driver.vo.DeviceConnectInfo">
+        <id column="device_id" property="deviceId"></id>
+        <result column="qos" property="qos" javaType="java.lang.Integer"></result>
+        <result column="upload_msg_type" property="uploadMessageType"></result>
+        <result column="issue_msg_type" property="sentMessageType"></result>
+    </resultMap>
+</mapper>
