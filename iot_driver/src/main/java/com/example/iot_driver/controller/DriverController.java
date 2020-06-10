@@ -3,12 +3,15 @@ package com.example.iot_driver.controller;
 import com.example.iot_driver.service.DriverService;
 import com.example.iot_driver.vo.DeviceConnectInfo;
 import com.example.iot_driver.vo.ResponseVO;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @RestController
+@Api
 public class DriverController {
 
     @Autowired
@@ -61,9 +64,25 @@ public class DriverController {
         return driverService.sendMessageToDevice(deviceId, message.get("message"));
     }
 
-    @RequestMapping(value = "/hello/{deviceId}", method = RequestMethod.GET)
-    public int hello(@PathVariable("deviceId") String deviceId){
-        System.out.println(deviceId);
-        return 0;
+    /**
+     * 激活设备
+     * 平台订阅设备所有订阅请求
+     */
+    @ApiOperation(value = "激活设备，平台订阅设备的所有订阅主题", notes = "暴露给设备管理的接口 设备激活时调用")
+    @RequestMapping(value = "/activateDevice/{deviceId}", method = RequestMethod.GET)
+    public ResponseVO activateDevice(@PathVariable("deviceId") int deviceId){
+        return driverService.activateDevice(deviceId);
     }
+
+//    @RequestMapping(value = "/hello/{deviceId}", method = RequestMethod.GET)
+//    public int hello(@PathVariable("deviceId") String deviceId){
+//        System.out.println(deviceId);
+//        return 0;
+//    }
+
+
+//    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+//    public String hello(){
+//        return "hello world";
+//    }
 }

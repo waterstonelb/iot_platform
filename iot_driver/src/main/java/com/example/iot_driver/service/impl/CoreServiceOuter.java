@@ -31,6 +31,17 @@ public class CoreServiceOuter implements ICoreServiceOuter {
     }
 
     @Override
+    public boolean addSub(String[] topics, int[] qoss) {
+        try {
+            subClient.addSubscribe(topics,qoss);
+            return true;
+        } catch (MqttException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
     public boolean addPub(String topic, int qos, String message) {
         try {
             if (qos != 0 && qos != 1 && qos != 2){

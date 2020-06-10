@@ -5,6 +5,8 @@ public interface ICoreServiceOuter {
     /**增加主题订阅*/
     boolean addSub(String[] topics, int qos);
 
+    boolean addSub(String[] topics, int[] qoss);
+
     /**增加信息发布*/
     boolean addPub(String topic, int qos, String message);
 

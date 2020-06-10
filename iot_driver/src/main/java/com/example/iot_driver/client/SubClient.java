@@ -83,6 +83,11 @@ public class SubClient {
         mqttClient.subscribe(topics, qoss);
     }
 
+    // 增加订阅
+    public void addSubscribe(String[] topics, int[] qoss) throws MqttException{
+        mqttClient.subscribe(topics,qoss);
+    }
+
     // 取消订阅
     public void removeSubscribe(String[] topics) throws MqttException{
         mqttClient.unsubscribe(topics);

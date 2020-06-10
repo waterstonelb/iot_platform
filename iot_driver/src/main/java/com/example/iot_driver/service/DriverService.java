@@ -1,12 +1,16 @@
 package com.example.iot_driver.service;
 
 import com.example.iot_driver.data.DriverMapper;
+import com.example.iot_driver.data.TopicMapper;
 import com.example.iot_driver.vo.DeviceConnectInfo;
 import com.example.iot_driver.vo.ResponseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class DriverService {
@@ -16,6 +20,9 @@ public class DriverService {
 
     @Autowired
     private DriverMapper driverMapper;
+
+    @Autowired
+    private TopicMapper topicMapper;
 
     public ResponseVO addConnect(DeviceConnectInfo deviceConnectInfo){
         if (driverMapper.addConnect(deviceConnectInfo) > 0){
@@ -84,6 +91,23 @@ public class DriverService {
             return ResponseVO.buildSuccess("消息发送成功");
         }else {
             return ResponseVO.buildFailure("消息发送失败");
+        }
+    }
+
+    public ResponseVO activateDevice(int deviceId){
+        List<Map<String, Object>> subList = topicMapper.getAllSub(deviceId);
+        String[] topics = new String[subList.size()];
+        int[] qoss = new int[subList.size()];
+        for (int i=0;i<subList.size();i++){
+            System.out.println(subList.get(i).get("topicName"));
+            System.out.println(subList.get(i).get("qos"));
+            topics[i] = (String) subList.get(i).get("topicName");
+            qoss[i] = (int) subList.get(i).get("qos");
+        }
+        if (coreServiceOuter.addSub(topics, qoss)){
+            return ResponseVO.buildSuccess("订阅成功");
+        }else {
+            return ResponseVO.buildFailure("订阅失败");
         }
     }
 }
