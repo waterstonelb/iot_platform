@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.iot_rule.ruleService.mapper.RuleServiceMapper">
+    <select id="getAllRules" resultType="com.example.iot_rule.ruleService.po.RulePO">
+        select * from rules
+        order by id desc
+    </select>
+    
+    <select id="getRuleById" resultType="com.example.iot_rule.ruleService.po.RulePO">
+        select * from rules
+        where id=#{id}
+    </select>
+
+    <insert id="addRule" useGeneratedKeys="true" keyProperty="id" parameterType="com.example.iot_rule.ruleService.vo.RuleFormVO" >
+        insert into rules (description,user_id,device_id,create_time)
+        values (#{description},#{userId},#{deviceId},current_timestamp)
+    </insert>
+
+    <delete id="deleteRuleById">
+        delete from rules where id=#{id}
+    </delete>
+
+    <update id="modifyRule">
+        update rules
+        set description=#{description},state=#{state},user_id=#{userId}, device_id=#{deviceId},target=#{target},topic=#{topic}, `condition`=#{condition}
+        where id= #{id}
+    </update>
+
+</mapper>
+
+
