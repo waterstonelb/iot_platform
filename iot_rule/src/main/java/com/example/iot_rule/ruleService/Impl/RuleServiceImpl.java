@@ -79,4 +79,28 @@ public class RuleServiceImpl implements RuleService {
         }
         return new ResponseEntity<>(null,msg);
     }
+
+    @Override
+    public ResponseEntity<String> startRule(int id){
+        int x=ruleServiceMapper.startRuleById(id);
+        String msg="";
+        if(x==1){
+            msg="启动成功";
+        }else if(x==0){
+            msg="启动失败";
+        }
+        return new ResponseEntity<>(null,msg);
+    }
+
+    @Override
+    public ResponseEntity<String> endRule(int id){
+        int x=ruleServiceMapper.endRuleById(id);
+        String msg="";
+        if(x==1){
+            msg="结束成功";
+        }else if(x==0){
+            msg="结束失败";
+        }
+        return new ResponseEntity<>(null,msg);
+    }
 }

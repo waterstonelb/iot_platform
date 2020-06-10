@@ -28,4 +28,8 @@ public interface RuleService {
 
     ResponseEntity<String> deleteRule(int id);
 
+    ResponseEntity<String> startRule(int id);
+
+    ResponseEntity<String> endRule(int id);
+
 }

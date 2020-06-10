@@ -3,7 +3,7 @@
 <mapper namespace="com.example.iot_rule.ruleService.mapper.RuleServiceMapper">
     <select id="getAllRules" resultType="com.example.iot_rule.ruleService.po.RulePO">
         select * from rules
-        order by id desc
+        order by id
     </select>
     
     <select id="getRuleById" resultType="com.example.iot_rule.ruleService.po.RulePO">
@@ -12,8 +12,8 @@
     </select>
 
     <insert id="addRule" useGeneratedKeys="true" keyProperty="id" parameterType="com.example.iot_rule.ruleService.vo.RuleFormVO" >
-        insert into rules (description,user_id,device_id,create_time)
-        values (#{description},#{userId},#{deviceId},current_timestamp)
+        insert into rules (description,user_id,device_id,target,topic,`condition`,create_time)
+        values (#{description},#{userId},#{deviceId},#{target},#{topic},#{condition},current_timestamp)
     </insert>
 
     <delete id="deleteRuleById">
@@ -24,6 +24,18 @@
         update rules
         set description=#{description},state=#{state},user_id=#{userId}, device_id=#{deviceId},target=#{target},topic=#{topic}, `condition`=#{condition}
         where id= #{id}
+    </update>
+
+    <update id="startRuleById">
+        update rules
+        set state=1
+        where id=#{id}
+    </update>
+
+    <update id="endRuleById">
+        update rules
+        set state=0
+        where id=#{id}
     </update>
 
 </mapper>

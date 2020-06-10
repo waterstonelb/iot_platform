@@ -41,11 +41,23 @@ public class RuleController {
         return ruleService.deleteRule(id);
     }
 
-
     @ApiOperation(value = "修改规则引擎",notes = "根据id修改规则引擎")
     @PostMapping("/modify")
     public ResponseEntity<String> modifyRule(@RequestBody RuleVO ruleVO){
         return ruleService.modifyRule(ruleVO);
     }
+
+    @ApiOperation(value = "启动一个规则引擎",notes = "根据id启动一个规则引擎")
+    @GetMapping("/start")
+    public ResponseEntity<String> startRule(int id){
+        return ruleService.startRule(id);
+    }
+
+    @ApiOperation(value = "结束一个规则引擎",notes = "根据id结束一个规则引擎")
+    @GetMapping("/end")
+    public ResponseEntity<String> endRule(int id){
+        return ruleService.endRule(id);
+    }
+
 
 }

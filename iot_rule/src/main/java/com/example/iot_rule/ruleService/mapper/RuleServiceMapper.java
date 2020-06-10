@@ -30,4 +30,8 @@ public interface RuleServiceMapper {
 
     int deleteRuleById(int id);
 
+    int startRuleById(int id);
+
+    int endRuleById(int id);
+
 }
