@@ -64,30 +64,25 @@ public class DataSourceImpl implements DataSourceInter {
             InputStream is = new FileInputStream(filePath);
             XSSFWorkbook xssfWorkbook = new XSSFWorkbook(is);
             XSSFSheet sheet = xssfWorkbook.getSheetAt(0);
-            int maxRow = sheet.getLastRowNum(); //获取总行数
-            //System.out.println("总行数：" + maxRow);
-            for(int row = 0;row<=maxRow;row++){
+            int maxRow = sheet.getLastRowNum();
+
+            for(int row = 1;row<=maxRow;row++){
                 deviceData info = new deviceData();
-                int maxRol = sheet.getRow(row).getLastCellNum();
 
-                if(!sheet.getRow(row).getCell(0).toString().equals("Keynotes")&&!sheet.getRow(row).getCell(0).toString().equals("Document Title")){
-                    //是正常数据而不是标题
-                    int id = Integer.parseInt(sheet.getRow(row).getCell(0).toString());
-                    String name = sheet.getRow(row).getCell(1).toString();
-                    double temp = Double.parseDouble(sheet.getRow(row).getCell(2).toString());
-                    double press = Double.parseDouble(sheet.getRow(row).getCell(3).toString());
-                    String time = sheet.getRow(row).getCell(5).toString();
-                    String ip=sheet.getRow(row).getCell(6).toString();
+                int id = (int)Double.parseDouble(sheet.getRow(row).getCell(0).toString());
+                String name = sheet.getRow(row).getCell(1).toString();
+                double temp = Double.parseDouble(sheet.getRow(row).getCell(2).toString());
+                double press = Double.parseDouble(sheet.getRow(row).getCell(3).toString());
+                String time = sheet.getRow(row).getCell(4).toString();
+                String ip=sheet.getRow(row).getCell(5).toString();
 
-                    info.setId(id);
-                    info.setName(name);
-                    info.setTemperature(temp);
-                    info.setPress(press);
-                    info.setIp(ip);
-                    info.setTime(time);
-                    list.add(info);
-
-                }
+                info.setId(id);
+                info.setName(name);
+                info.setTemperature(temp);
+                info.setPress(press);
+                info.setIp(ip);
+                info.setTime(time);
+                list.add(info);
             }
             return list;
         }catch (Exception e){

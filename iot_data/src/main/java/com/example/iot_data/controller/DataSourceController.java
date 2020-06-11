@@ -30,13 +30,12 @@ public class DataSourceController {
     @RequestMapping(value = {"/addExternalData"},method = RequestMethod.POST)
     @ResponseBody
     public int addExternalData(@RequestBody(required = false) String filePath){ //处理.xlsx 文件 必须给全文件名路径
-        System.out.println(filePath);
-        String new1 = filePath;
-        File file = new File(new1.substring(1, new1.length() - 1));
+        String path = filePath.substring(1,filePath.length()-1);
+        File file = new File(path);
         if(!file.exists()){
             return -1;
         }else {
-            int result = dataSourceInter.addExternalData(new1.substring(1, new1.length() - 1));
+            int result = dataSourceInter.addExternalData(path);
             return result;
         }
     }
