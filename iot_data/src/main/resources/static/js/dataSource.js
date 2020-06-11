@@ -46,27 +46,45 @@ $(document).ready(function(){
         $('#fileForm').show();
     })
 
-    $('.add').on('click','#btn1',function(){
+    $('.Form').on('click','#btn1',function(){
         var name=$('#devicename').val();
         $.ajax({
             type:'POST',
             url: '/addDeviceData',
             data: JSON.stringify(name),
             asnyc: true,
-            success:function(res){},
-            error:function(res){}
+            success:function(res){
+                $('#deviceForm').hide();
+                $('#devicename').val('');
+                getDeviceList();
+            },
+            error:function(res){
+                alert('failure');
+            }
         })
     })
 
-    $('.add').on('click','#btn2',function(){
+    $('.Form').on('click','#btn2',function(){
         var filepath=$('#filepath').val();
         $.ajax({
             type:'POST',
             url: '/addExternalData',
             data: JSON.stringify(filepath),
             asnyc: true,
-            success:function(res){},
-            error:function(res){}
+            success:function(res){
+                if(res>0)
+                    alert('成功添加'+res+'条数据');
+                else if(res==0)
+                    alert('文件数据已存在');
+                else
+                    alert("找不到文件路径");
+                $('#filepath').val('');
+                $('#fileForm').hide();
+                getDeviceList();
+            },
+            error:function(res){
+                alert('failure');
+            }
         })
     })
 
