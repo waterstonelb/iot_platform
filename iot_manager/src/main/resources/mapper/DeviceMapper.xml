@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace是命名空间，是mapper接口的全路径-->
+<mapper namespace="com.example.iot_manager.mapper.DeviceMapper">
+
+  <!--resultMap – 是最复杂也是最强大的元素，用来描述如何从数据库结果集中来加载对象-->
+  <resultMap id="deviceResultMap" type="com.example.iot_manager.data.Device">
+    <id column="device_id" property="id"></id>
+    <result column="model_id" property="modelId"></result>
+    <result column="group_id" property="groupId"></result>
+    <result column="device_name" property="deviceName"></result>
+    <result column="
+    <result column="device_status" property="deviceStatus"></result>
+    <result column="survive_time" property="surviveTime"></result>
+    <result column="start_time" property="startTime"></result>
+    <result column="stop_time" property="stopTime"></result>
+  </resultMap>
+
+  <!--sql – 可被其他语句引用的可重用语句块-->
+  <sql id="colums">
+        id,model_id,group_id,,device_name,device_status,survive_time,start_time,stop_time
+    </sql>
+
+  <select id="findAllDevice" resultMap="deviceResultMap">
+    select
+    <include refid="colums" />
+    from  device
+  </select>
+
+  <select id="findDeviceById" resultMap="deviceResultMap">
+    select
+    <include refid="colums" />
+    from  device
+    where  id=#{id}
+  </select>
+
+  <insert id="addDevice" parameterType="com.example.iot_manager.data.Device" >
+       INSERT INTO
+       		device
+       	VALUES
+       		(#{name}, #{age}, #{pwd})
+    </insert>
+
+  <update id="updateDevice" parameterType="com.example.iot_manager.data.Device" >
+    UPDATE
+    users
+    SET
+    <if test="username != null">username = #{username},</if>
+    <if test="pwd != null">pwd = #{pwd},</if>
+    username = #{username}
+    WHERE
+    id = #{id}
+  </update>
+
+  <delete id="deleteDevice" parameterType="java.lang.Long" >
+       DELETE FROM
+       		 device
+       WHERE
+       		 id =#{id}
+    </delete>
+
+</mapper>

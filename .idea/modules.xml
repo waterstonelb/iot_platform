@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/iot_data/iot_data.iml" filepath="$PROJECT_DIR$/iot_data/iot_data.iml" />
+      <module fileurl="file://$PROJECT_DIR$/iot_driver/iot_driver.iml" filepath="$PROJECT_DIR$/iot_driver/iot_driver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/iot_eureka/iot_eureka.iml" filepath="$PROJECT_DIR$/iot_eureka/iot_eureka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/iot_manager/iot_manager.iml" filepath="$PROJECT_DIR$/iot_manager/iot_manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/iot_platform.iml" filepath="$PROJECT_DIR$/.idea/iot_platform.iml" />
+      <module fileurl="file://$PROJECT_DIR$/iot_rule/iot_rule.iml" filepath="$PROJECT_DIR$/iot_rule/iot_rule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/iot_zuul/iot_zuul.iml" filepath="$PROJECT_DIR$/iot_zuul/iot_zuul.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/iot_data" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/iot_data/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/iot_driver" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/iot_driver/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/iot_eureka" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/iot_eureka/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/iot_manager" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/iot_manager/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/iot_rule" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/iot_rule/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/iot_zuul" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/iot_zuul/src/main/java" charset="UTF-8" />
+  </component>
+</project>
