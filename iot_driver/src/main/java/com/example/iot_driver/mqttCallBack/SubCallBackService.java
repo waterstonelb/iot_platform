@@ -1,5 +1,6 @@
 package com.example.iot_driver.mqttCallBack;
 
+import com.example.iot_driver.service.DataForwarding;
 import com.example.iot_driver.service.ICoreServiceInner;
 import com.example.iot_driver.service.SaveService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +15,18 @@ public class SubCallBackService {
     @Autowired
     private SaveService saveService;
 
+    @Autowired
+    private DataForwarding dataForwarding;
+
     /** 设备消息处理*/
     public void messageHandle(String topic, String message){
         System.out.println(topic);
         System.out.println(message);
+        dataForwarding.transport(topic, message);
         boolean isValid = coreServiceInner.isValidTopic(topic);
         if (isValid){
-            saveService.saveMessage(topic, message);
+//            saveService.saveMessage(topic, message);
+            dataForwarding.transport(topic, message);
         }
     }
 
