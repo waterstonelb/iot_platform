@@ -54,6 +54,7 @@ $(document).ready(function(){
             data: JSON.stringify(name),
             asnyc: true,
             success:function(res){
+                //TODO
                 $('#deviceForm').hide();
                 $('#devicename').val('');
                 getDeviceList();

@@ -34,4 +34,8 @@
       select * from device where name = #{name} and temperature between #{temp1} and #{temp2} and press between #{press1} and #{press2} and time between #{time1} and #{time2} order by press
     </select>
 
+    <select id="sqlAnalyze" parameterType="String" resultType="com.example.iot_data.po.deviceData">
+        ${sql}
+    </select>
+
 </mapper>

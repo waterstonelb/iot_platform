@@ -10,6 +10,6 @@ import java.util.List;
 @Mapper
 @Component
 public interface DataAssetMapper {
-    List<deviceData> getData(@Param("name")String name);
+    List<deviceData> getData(String name);
     List<deviceData> getDevice();
 }

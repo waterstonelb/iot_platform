@@ -8,6 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLSyntaxErrorException;
 import java.util.List;
 import java.util.Map;
 
@@ -44,5 +45,12 @@ public class AnalyzeController {
         String attr=condition.get("属性");
         int p=Integer.parseInt(condition.get("顺序"));
         return analyzeInter.getDeviceDataByCondition(name,temperature1,temperature2,press1,press2,time1,time2,attr,p);
+    }
+
+    @RequestMapping(value={"/sql"},method= RequestMethod.POST)
+    @ResponseBody
+    public List<deviceData> sqlAnalyze(@RequestBody String data) throws SQLSyntaxErrorException {
+        String sql=data.substring(1,data.length()-1);
+        return analyzeInter.sqlAnalyze(sql);
     }
 }

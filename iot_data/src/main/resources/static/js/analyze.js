@@ -47,13 +47,18 @@ $(document).ready(function(){
     }
 
     function sql(){
-        var text="<button type='button' id='createAnalyze'> + 新建SQL分析</button>";
+        var text="<button type='button' id='createSQLAnalyze'> + 新建SQL分析</button>";
         $('.create').html(text);
     }
 
-    $('.create').on('click','button',function(){
+    $('.create').on('click','#createAnalyze',function(){
         $('.container').html("");
         getDeviceList();
+    })
+
+    $('.create').on('click','#createSQLAnalyze',function(){
+        $('.container').html("");
+        getSQL();
     })
 
     function getDeviceList(){
@@ -82,6 +87,16 @@ $(document).ready(function(){
         })
     }
 
+    function getSQL(){
+        var text="<div class='sql-console' style='text-align: center'>" +
+            "<form>" +
+            "<textarea id='sql-content' cols='150' rows='5' placeholder='请输入SQL语句'></textarea>" +
+            "<button type='button' id='run' style='background-color:blue;color:white'>运行</button>" +
+            "</form></div>" +
+            "<div class='console' id='graph' style='margin-top: 10px'></div>";
+        $('.container').html(text);
+    }
+
     $('.container').on('change','#device',function(){
         deviceName=$(this).val();
         getTable();
@@ -107,9 +122,6 @@ $(document).ready(function(){
                         "<label style='margin-left: 1%'>压力：</label><input id='press1' style='width:30px' type='text'/>N —— <input id='press2' style='width:30px' type='text'/>N";
                     $('.select-device').append(text);
                     visualAnalyze(res);
-                }
-                else{
-                    //SQL TODO
                 }
             },
             error:function(res){
@@ -317,5 +329,64 @@ $(document).ready(function(){
                 alert(res);
             }
         })
+    }
+
+    $('.container').on('click','#run',function(){
+        var sql=$('#sql-content').val();
+        if(!sql.startsWith('select'))
+            alert('仅支持查询操作');
+
+        else{
+            $.ajax({
+                type:'POST',
+                url: '/sql',
+                asnyc: true,
+                data: JSON.stringify(sql),
+                contentType: 'application/json',
+                processData: false,
+                success:function(res){
+                    if(res==null||res.length==0)
+                        alert('请检查SQL语句是否正确');
+                    else
+                        sqlTable(res);
+                },
+                error:function (res) {
+                    alert(res);
+                }
+            })
+        }
+    })
+
+    function sqlTable(res){
+        var text="<table style='margin: 0 auto'><thead>" +
+            "<tr>";
+
+        if(res[0].name!=null)
+            text+="<th scope='col' style='white-space: nowrap'>设备名称</th>";
+        if(res[0].temperature!=0.0)
+            text+= "<th scope='col' style='white-space: nowrap'>温度</th>";
+        if(res[0].press!=0.0)
+            text+="<th scope='col' style='white-space: nowrap'>压力</th>";
+        if(res[0].time!=null)
+            text+="<th scope='col' style='white-space: nowrap'>创建时间</th>";
+        text+="</tr>" +
+            "</thead>"+
+            "<tbody id='table'>";
+
+        for(var i=0;i<res.length;i++){
+            text+="<tr>";
+            if(res[i].name!=null)
+                text+="<td>" + res[i].name + "</td>";
+            if(res[i].temperature!=0.0)
+                text+="<td>" + res[i].temperature.toFixed(1) + "</td>";
+            if(res[i].press!=0.0)
+                text+="<td>" + res[i].press.toFixed(2) + "</td>";
+            if(res[i].time!=null)
+                text+="<td>" + res[i].time + "</td>";
+            text+="</tr>";
+        }
+        text+="</tbody></table>";
+
+        $('.console').html(text);
     }
 })
