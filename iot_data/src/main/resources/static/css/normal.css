@@ -1,0 +1,34 @@
+#menu{
+    font-size: 18px;
+    font-weight: bold;
+}
+#menu li{
+    text-decoration: none;
+    list-style: none;
+    display: inline;
+    color: floralwhite;
+}
+#menu li .active{
+    border-bottom:1px solid floralwhite;
+}
+#menu li a:link{
+    color:floralwhite;
+    text-decoration: none;
+}
+#menu li a:visited{
+    color:floralwhite;
+}
+
+.head{
+    background-color: dodgerblue;
+    color: floralwhite;
+}
+
+td{
+    width:200px;
+    text-align: left;
+}
+th{
+    width:200px;
+    text-align: left;
+}

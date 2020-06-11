@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.iot_data.dao.SpaceVisualMapper">
+
+    <select id="getPoint" resultType="com.example.iot_data.po.deviceData">
+      select name,ip from device group by name,ip
+    </select>
+
+</mapper>

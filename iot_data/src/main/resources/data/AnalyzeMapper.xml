@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.iot_data.dao.AnalyzeMapper">
+
+    <select id="getDataByTime" resultType="com.example.iot_data.po.deviceData">
+        select * from device where name=#{name} and time between #{time1} and #{time2}
+    </select>
+
+    <select id="getDeviceData" resultType="com.example.iot_data.po.deviceData">
+      select * from device where name = #{name}
+    </select>
+
+    <select id="getDeviceDataByTime1" resultType="com.example.iot_data.po.deviceData">
+      select * from device where name = #{name} and temperature between #{temp1} and #{temp2} and press between #{press1} and #{press2} and time between #{time1} and #{time2} order by time desc
+    </select>
+
+    <select id="getDeviceDataByTime2" resultType="com.example.iot_data.po.deviceData">
+      select * from device where name = #{name} and temperature between #{temp1} and #{temp2} and press between #{press1} and #{press2} and time between #{time1} and #{time2} order by time
+    </select>
+
+    <select id="getDeviceDataByTemp1" resultType="com.example.iot_data.po.deviceData">
+      select * from device where name = #{name} and temperature between #{temp1} and #{temp2} and press between #{press1} and #{press2} and time between #{time1} and #{time2} order by temperature desc
+    </select>
+
+    <select id="getDeviceDataByTemp2" resultType="com.example.iot_data.po.deviceData">
+      select * from device where name = #{name} and temperature between #{temp1} and #{temp2} and press between #{press1} and #{press2} and time between #{time1} and #{time2} order by temperature
+    </select>
+
+    <select id="getDeviceDataByPress1" resultType="com.example.iot_data.po.deviceData">
+      select * from device where name = #{name} and temperature between #{temp1} and #{temp2} and press between #{press1} and #{press2} and time between #{time1} and #{time2} order by press desc
+    </select>
+
+    <select id="getDeviceDataByPress2" resultType="com.example.iot_data.po.deviceData">
+      select * from device where name = #{name} and temperature between #{temp1} and #{temp2} and press between #{press1} and #{press2} and time between #{time1} and #{time2} order by press
+    </select>
+
+</mapper>
