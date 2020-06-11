@@ -34,4 +34,6 @@ public interface RuleServiceMapper {
 
     int endRuleById(int id);
 
+    List<RulePO> selectRulesByTopic(String topic);
+
 }

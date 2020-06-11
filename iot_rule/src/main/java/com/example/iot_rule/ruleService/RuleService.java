@@ -5,6 +5,7 @@ import com.example.iot_rule.ruleService.vo.PageRequest;
 import com.example.iot_rule.ruleService.vo.ResponseEntity;
 import com.example.iot_rule.ruleService.vo.RuleFormVO;
 import com.example.iot_rule.ruleService.vo.RuleVO;
+import net.sf.jsqlparser.statement.select.Top;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
@@ -33,6 +34,7 @@ public interface RuleService {
 
     ResponseEntity<String> endRule(int id);
 
+    ResponseEntity<String> handlerData(TopicPO topicPO);
 
 
 }

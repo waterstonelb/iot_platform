@@ -7,9 +7,9 @@ spring:
     name: iot-rule
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/iot?serverTimezone=CTT&characterEncoding=UTF-8
+    url: jdbc:mysql://101.200.189.184:3306/iotTest?serverTimezone=CTT&characterEncoding=UTF-8
     username: root
-    password: 123456
+    password: root
 
   jpa:
     hibernate:

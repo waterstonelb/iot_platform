@@ -63,11 +63,9 @@ public class RuleController {
 
     @ApiOperation(value = "接收设备上传的数据",notes = "")
     @PostMapping("/data")
-    public ResponseEntity<TopicPO> receiveData(@RequestBody TopicPO topicPO){
+    public ResponseEntity<String> receiveData(@RequestBody TopicPO topicPO){
 
-        return new ResponseEntity<>(topicPO);
+        return ruleService.handlerData(topicPO);
     }
-
-
 
 }

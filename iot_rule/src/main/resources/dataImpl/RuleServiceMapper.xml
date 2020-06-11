@@ -38,6 +38,11 @@
         where id=#{id}
     </update>
 
+    <select id="selectRulesByTopic" resultType="com.example.iot_rule.ruleService.po.RulePO">
+        select * from rules
+        where topic=#{topic} and state=1
+    </select>
+
 </mapper>
 
 
