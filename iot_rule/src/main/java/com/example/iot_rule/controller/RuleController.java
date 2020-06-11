@@ -18,6 +18,11 @@ public class RuleController {
     @Autowired
     RuleService ruleService;
 
+    @GetMapping("/hello")
+    public String test(){
+        return "hello world";
+    }
+
     @ApiOperation(value = "查询所有规则引擎",notes = "返回一个规则引擎列表")
     @PostMapping("/allRules")
     public ResponseEntity<List<RuleVO>> getAllRules(@RequestBody PageRequest pageRequest){
