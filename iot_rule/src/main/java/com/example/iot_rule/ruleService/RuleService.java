@@ -1,5 +1,6 @@
 package com.example.iot_rule.ruleService;
 
+import com.example.iot_rule.ruleService.po.TopicPO;
 import com.example.iot_rule.ruleService.vo.PageRequest;
 import com.example.iot_rule.ruleService.vo.ResponseEntity;
 import com.example.iot_rule.ruleService.vo.RuleFormVO;
@@ -31,5 +32,7 @@ public interface RuleService {
     ResponseEntity<String> startRule(int id);
 
     ResponseEntity<String> endRule(int id);
+
+
 
 }

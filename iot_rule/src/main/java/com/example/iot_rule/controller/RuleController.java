@@ -1,6 +1,7 @@
 package com.example.iot_rule.controller;
 
 import com.example.iot_rule.ruleService.RuleService;
+import com.example.iot_rule.ruleService.po.TopicPO;
 import com.example.iot_rule.ruleService.vo.PageRequest;
 import com.example.iot_rule.ruleService.vo.ResponseEntity;
 import com.example.iot_rule.ruleService.vo.RuleFormVO;
@@ -58,6 +59,15 @@ public class RuleController {
     public ResponseEntity<String> endRule(int id){
         return ruleService.endRule(id);
     }
+
+
+    @ApiOperation(value = "接收设备上传的数据",notes = "")
+    @PostMapping("/data")
+    public ResponseEntity<TopicPO> receiveData(@RequestBody TopicPO topicPO){
+
+        return new ResponseEntity<>(topicPO);
+    }
+
 
 
 }
