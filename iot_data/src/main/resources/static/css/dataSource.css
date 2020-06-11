@@ -1,0 +1,37 @@
+.container-head{
+    width: 300px;
+    display: flex;
+    justify-content: space-around;
+}
+
+#fileForm{
+    display:none;
+    position:absolute;
+    background-color: white;
+    height:150px;
+    width:400px;
+    top:60px;
+    right:50px;
+}
+
+#deviceForm{
+    display:none;
+    position:absolute;
+    background-color: white;
+    height:150px;
+    width:400px;
+    top:60px;
+    right:50px;
+}
+
+.namepwd{
+    text-align: center;
+    padding:10px;
+}
+#btn1{
+    width:100px;
+}
+
+#btn2{
+    width:100px;
+}

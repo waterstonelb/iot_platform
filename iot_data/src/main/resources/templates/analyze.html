@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分析透视</title>
+    <link rel="stylesheet" type="text/css" href="/css/normal.css">
+    <link rel="stylesheet" type="text/css" href="/css/analyze.css">
+    <!--script src="https://cdn.bootcss.com/echarts/4.6.0/echarts-en.common.js" charset="utf-8"></script-->
+    <script src="/js/echarts.js"></script>
+    <script src="/js/echarts.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/analyze.js"></script>
+</head>
+<body>
+<div>
+    <div class="head">
+        <ul id="menu">
+            <li><a onclick="javascript:history.back(-1);">< Back</a></li>
+            <li><a href="dataAsset">数据资产</a></li>
+            <li><a href="dataSource">数据源</a></li>
+            <li class="active"><a href="#">分析透视</a></li>
+            <li><a href="stream">流数据处理</a></li>
+            <li><a href="monitor">智能监测</a></li>
+            <li><a href="space">空间数据可视化</a></li>
+        </ul>
+    </div>
+
+    <div class="container" style="margin-left: 10px">
+        <div class="container-head">
+            <div class="category" style="background-color:darkgrey;width:50%;margin:0px">时序透视</div>
+            <div class="category" style="width:50%;margin:0px">可视化分析</div>
+            <div class="category" style="width:50%;margin:0px">SQL分析</div>
+        </div>
+        <div class="container-body">
+            <div class='create'>
+                <button type='button' id='createAnalyze'> + 新建时序透视</button>
+            </div>
+            <div class="history"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

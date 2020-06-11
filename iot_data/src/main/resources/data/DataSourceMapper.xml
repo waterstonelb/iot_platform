@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.iot_data.dao.DataSourceMapper">
+
+    <delete id="delete">
+      delete from device where name = #{name}
+    </delete>
+
+    <insert id="addDeviceData">
+        insert into device(device_id,name,temperature,press,time,ip)
+        values(#{id},#{name},#{temperature},#{press},#{time},#{ip})
+    </insert>
+
+    <select id="getDeviceData" resultType="com.example.iot_data.po.deviceData">
+        select * from device where device_id=#{id} and name=#{name} and time=#{time} and ip=#{ip}
+    </select>
+
+</mapper>
