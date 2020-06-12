@@ -3,6 +3,7 @@ package com.example.iot_data.serviceImpl;
 import com.example.iot_data.dao.DataSourceMapper;
 import com.example.iot_data.po.deviceData;
 
+import com.example.iot_data.po.deviceDataList;
 import com.example.iot_data.service.DataSourceInter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,8 +20,32 @@ public class DataSourceImpl implements DataSourceInter {
     private DataSourceMapper dataSourceMapper;
 
     @Override
-    public int addDeviceData(String name){
-        return 0;
+    public int addDeviceData(deviceDataList data){
+        List<deviceData> newList=data.getList();
+        int count=0;
+
+        if(newList!=null) {
+
+            for (int i = 0; i < newList.size(); i++) {
+                String name = newList.get(i).getName();
+                int id = newList.get(i).getId();
+                String time=newList.get(i).getTime();
+                String ip=newList.get(i).getIp();
+                List<deviceData> indexList = dataSourceMapper.getDeviceData(id,name,time,ip);
+                if (indexList.size() != 0) { //有重复的数据
+                    continue;
+                } else { //没有重复的数据，可以添加数据
+                    double temp=newList.get(i).getTemperature();
+                    double press=newList.get(i).getPress();
+                    count++;
+                    dataSourceMapper.addDeviceData(id,name,temp,press,time,ip);
+                }
+            }
+            return count;
+        }else{
+            return -1;
+        }
+
     }
 
     @Override
