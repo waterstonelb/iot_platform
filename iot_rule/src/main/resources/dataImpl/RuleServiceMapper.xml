@@ -43,6 +43,16 @@
         where topic=#{topic} and state=1
     </select>
 
+    <insert id="addDataTransmitHttp" useGeneratedKeys="true" keyProperty="id" parameterType="com.example.iot_rule.ruleService.po.DataTransmitHttpPO">
+        insert into http_transmit (rule_id,transmit_address,create_time)
+        values(#{ruleId},#{transmitAddress},current_timestamp)
+    </insert>
+
+    <insert id="addDataTransmitTopic" useGeneratedKeys="true" keyProperty="id" parameterType="com.example.iot_rule.ruleService.po.DataTransmitTopicPO">
+        insert into topic_transmit(rule_id,target_topic,create_time)
+        values(#{ruleId},#{targetTopic},current_timestamp)
+    </insert>
+
 </mapper>
 
 

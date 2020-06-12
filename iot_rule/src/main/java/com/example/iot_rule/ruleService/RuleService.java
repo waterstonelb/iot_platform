@@ -1,14 +1,12 @@
 package com.example.iot_rule.ruleService;
 
 import com.example.iot_rule.ruleService.po.TopicPO;
-import com.example.iot_rule.ruleService.vo.PageRequest;
-import com.example.iot_rule.ruleService.vo.ResponseEntity;
-import com.example.iot_rule.ruleService.vo.RuleFormVO;
-import com.example.iot_rule.ruleService.vo.RuleVO;
+import com.example.iot_rule.ruleService.vo.*;
 import net.sf.jsqlparser.statement.select.Top;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Name:
@@ -34,7 +32,11 @@ public interface RuleService {
 
     ResponseEntity<String> endRule(int id);
 
-    ResponseEntity<String> handlerData(TopicPO topicPO);
+    ResponseEntity<List<TopicVO>> handlerData(TopicPO topicPO);
+
+    ResponseEntity<String> dataTransmitTopic(int id,DataTransmitTopicFormVO dataTransmitTopicFormVO);
+
+    ResponseEntity<String> dataTransmitHttp(int id, DataTransmitHttpFormVO dataTransmitHttpFormVO);
 
 
 }

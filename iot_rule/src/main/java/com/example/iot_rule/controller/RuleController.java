@@ -2,15 +2,13 @@ package com.example.iot_rule.controller;
 
 import com.example.iot_rule.ruleService.RuleService;
 import com.example.iot_rule.ruleService.po.TopicPO;
-import com.example.iot_rule.ruleService.vo.PageRequest;
-import com.example.iot_rule.ruleService.vo.ResponseEntity;
-import com.example.iot_rule.ruleService.vo.RuleFormVO;
-import com.example.iot_rule.ruleService.vo.RuleVO;
+import com.example.iot_rule.ruleService.vo.*;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/rules")
@@ -18,6 +16,7 @@ public class RuleController {
     @Autowired
     RuleService ruleService;
 
+    @ApiOperation(value = "hello world",notes = "测试")
     @GetMapping("/hello")
     public String test(){
         return "hello world";
@@ -74,9 +73,22 @@ public class RuleController {
 
     @ApiOperation(value = "接收设备上传的数据（不是给cp用的）",notes = "")
     @PostMapping("/data")
-    public ResponseEntity<String> receiveData(@RequestBody TopicPO topicPO){
+    public ResponseEntity<List<TopicVO>> receiveData(@RequestBody TopicPO topicPO){
 
         return ruleService.handlerData(topicPO);
     }
+
+    @ApiOperation(value = "为规则引擎配置数据转发",notes = "转发数据到另一个Topic")
+    @PostMapping("/dataTransmitTopic")
+    public ResponseEntity<String> dataTransmitTopic(int id,@RequestBody DataTransmitTopicFormVO dataTransmitTopicFormVO){
+        return ruleService.dataTransmitTopic(id,dataTransmitTopicFormVO);
+    }
+
+    @ApiOperation(value = "为规则引擎配置数据转发",notes = "转发数据到HTTP接口")
+    @PostMapping("/dataTransmitHttp")
+    public ResponseEntity<String> dataTransmitHttp(int id, @RequestBody DataTransmitHttpFormVO dataTransmitHttpFormVO){
+        return ruleService.dataTransmitHttp(id,dataTransmitHttpFormVO);
+    }
+
 
 }

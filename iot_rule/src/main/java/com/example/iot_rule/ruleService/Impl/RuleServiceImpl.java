@@ -1,13 +1,12 @@
 package com.example.iot_rule.ruleService.Impl;
 
 import com.example.iot_rule.ruleService.mapper.RuleServiceMapper;
+import com.example.iot_rule.ruleService.po.DataTransmitHttpPO;
+import com.example.iot_rule.ruleService.po.DataTransmitTopicPO;
 import com.example.iot_rule.ruleService.po.RulePO;
 import com.example.iot_rule.ruleService.RuleService;
 import com.example.iot_rule.ruleService.po.TopicPO;
-import com.example.iot_rule.ruleService.vo.ResponseEntity;
-import com.example.iot_rule.ruleService.vo.PageRequest;
-import com.example.iot_rule.ruleService.vo.RuleFormVO;
-import com.example.iot_rule.ruleService.vo.RuleVO;
+import com.example.iot_rule.ruleService.vo.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.models.auth.In;
@@ -15,7 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Name:
@@ -107,8 +109,9 @@ public class RuleServiceImpl implements RuleService {
     }
 
     @Override
-    public ResponseEntity<String> handlerData(TopicPO topicPO){
+    public ResponseEntity<List<TopicVO>> handlerData(TopicPO topicPO){
         List<RulePO> rulePOS=ruleServiceMapper.selectRulesByTopic(topicPO.getTopic());//找出所有订阅该topic且处于开启状态的规则
+        List<TopicVO> topicVOS=new ArrayList<>();
         for(RulePO rulePO:rulePOS){
             String condition=rulePO.getCondition();
             if(condition.contains("=")){
@@ -116,11 +119,19 @@ public class RuleServiceImpl implements RuleService {
                 if(topicPO.getMap().containsKey(strArr[0])){
                     if(isDigit(strArr[1])){
                         int x=Integer.parseInt(strArr[1]);
-                        if(topicPO.getMap().get(strArr[0]).equals(x)){
+                        if(topicPO.getMap().get(strArr[0]).equals(x)){    //规则引擎接收到订阅的topic发来的消息
+                            TopicVO topicVO=new TopicVO();
+                            topicVO.setRuleId(rulePO.getId());
+                            topicVO.setMap(topicPO.getMap());
+                            topicVOS.add(topicVO);
                             System.out.println(rulePO.getTarget()+":"+topicPO.getMap().get(rulePO.getTarget()));
                         }
                     }else {
                         if(topicPO.getMap().get(strArr[0]).equals(strArr[1])){
+                            TopicVO topicVO=new TopicVO();
+                            topicVO.setRuleId(rulePO.getId());
+                            topicVO.setMap(topicPO.getMap());
+                            topicVOS.add(topicVO);
                             System.out.println(rulePO.getTarget()+":"+topicPO.getMap().get(rulePO.getTarget()));
                         }
                     }
@@ -129,14 +140,66 @@ public class RuleServiceImpl implements RuleService {
                 String [] strArr=condition.split(">");
                 if(topicPO.getMap().containsKey(strArr[0])){
                     if((Double)topicPO.getMap().get(strArr[0])>Double.parseDouble(strArr[1])){
+                        TopicVO topicVO=new TopicVO();
+                        topicVO.setRuleId(rulePO.getId());
+                        topicVO.setMap(topicPO.getMap());
+                        topicVOS.add(topicVO);
                         System.out.println(rulePO.getTarget()+":"+topicPO.getMap().get(rulePO.getTarget()));
                     }
                 }
-
+            }else if(condition.contains("<")){
+                String [] strArr=condition.split("<");
+                if(topicPO.getMap().containsKey(strArr[0])){
+                    if((Double)topicPO.getMap().get(strArr[0])<Double.parseDouble(strArr[1])){
+                        TopicVO topicVO=new TopicVO();
+                        topicVO.setRuleId(rulePO.getId());
+                        topicVO.setMap(topicPO.getMap());
+                        topicVOS.add(topicVO);
+                        System.out.println(rulePO.getTarget()+":"+topicPO.getMap().get(rulePO.getTarget()));
+                    }
+                }
             }
         }
-        return new ResponseEntity<>(null,"成功");
+        return new ResponseEntity<>(topicVOS);
     }
+
+    //todo:转发数据到另一个topic
+    @Override
+    public ResponseEntity<String> dataTransmitTopic(int id,DataTransmitTopicFormVO dataTransmitTopicFormVO){
+        DataTransmitTopicPO dataTransmitTopicPO=new DataTransmitTopicPO();
+        dataTransmitTopicPO.setRuleId(id);
+        dataTransmitTopicPO.setTargetTopic(dataTransmitTopicFormVO.getTargetTopic());
+        int x=ruleServiceMapper.addDataTransmitTopic(dataTransmitTopicPO);
+        String msg="";
+        if(x==1){
+            msg="创建数据转发成功";
+        }else if(x==0){
+            msg="创建数据转发失败";
+        }
+        return new ResponseEntity<>(null,msg);
+    }
+
+    @Override
+    public ResponseEntity<String> dataTransmitHttp(int id, DataTransmitHttpFormVO dataTransmitHttpFormVO){
+        RulePO rulePO=ruleServiceMapper.getRuleById(id);
+        DataTransmitHttpPO dataTransmitHttpPO=new DataTransmitHttpPO();
+        dataTransmitHttpPO.setRuleId(id);
+        dataTransmitHttpPO.setTransmitAddress(dataTransmitHttpFormVO.getHttpInterface());
+        int x=ruleServiceMapper.addDataTransmitHttp(dataTransmitHttpPO);
+        String msg="";
+        if(x==1){
+            msg="创建数据转发成功";
+        }else if(x==0){
+            msg="创建数据转发失败";
+        }
+        return new ResponseEntity<>(null,msg);
+    }
+
+
+
+
+
+
 
     private boolean isDigit(String str){
         try {
