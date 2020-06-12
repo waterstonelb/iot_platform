@@ -21,8 +21,6 @@ public class DeviceDo implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int deviceId;
 
-  private int modelId;
-
   private int groupId = -1;
 
   private String deviceName;
@@ -32,6 +30,8 @@ public class DeviceDo implements Serializable {
   private int isOnline = 0;
 
   private String protocol;
+
+  private String ipAddress;
 
   private String deviceDescription;
 
@@ -47,7 +47,7 @@ public class DeviceDo implements Serializable {
     this.deviceName = deviceVO.getDeviceName();
     this.deviceDescription = deviceVO.getDeviceDescription();
     this.protocol = deviceVO.getProtocol();
-    this.modelId = deviceVO.getModelId();
+    this.ipAddress = deviceVO.getIpAddress();
     this.groupId = deviceVO.getGroupId();
   }
 

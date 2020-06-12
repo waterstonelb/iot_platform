@@ -64,7 +64,7 @@ public class DeviceController {
     return deviceService.updateGroup(groupId, deviceId);
   }
 
-  @ApiOperation("更新设备状态")
+  @ApiOperation("更新设备状态：0禁用，1开启")
   @PostMapping("/updatestatus")
   public ResponseVO<String> updateStatus(@RequestBody StatusVO statusVO) {
     System.out.println(statusVO.getDeviceId());
@@ -78,7 +78,7 @@ public class DeviceController {
     return deviceService.updateDevice(deviceId, deviceVO);
   }
 
-  @ApiOperation("更新设备是否在线")
+  @ApiOperation("更新设备是否在线：0下线，1上线")
   @PostMapping("updateonline")
   public ResponseVO<String> updateOnline(@RequestBody StatusVO statusVO) {
     return deviceService.updateOnline(statusVO.getStatus(), statusVO.getDeviceId());
