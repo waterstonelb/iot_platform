@@ -2,6 +2,7 @@ package com.example.iot_manager.controller;
 
 import com.example.iot_manager.data.DeviceDo;
 import com.example.iot_manager.service.DeviceService;
+import com.example.iot_manager.vo.DeviceGroupVO;
 import com.example.iot_manager.vo.DeviceVO;
 import com.example.iot_manager.vo.ResponseVO;
 import com.example.iot_manager.vo.StatusVO;
@@ -82,6 +83,12 @@ public class DeviceController {
   @PostMapping("updateonline")
   public ResponseVO<String> updateOnline(@RequestBody StatusVO statusVO) {
     return deviceService.updateOnline(statusVO.getStatus(), statusVO.getDeviceId());
+  }
+
+  @ApiOperation("获取组内设备")
+  @GetMapping("/groupdevice")
+  public ResponseVO<List<DeviceGroupVO>> getDeviceInGroup(int groupId,int page ,int size){
+    return deviceService.getDeviceInGroup(groupId, page, size);
   }
 
 

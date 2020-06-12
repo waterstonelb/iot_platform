@@ -1,21 +1,29 @@
 package com.example.iot_manager.vo;
 
-import com.example.iot_manager.data.DeviceDo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor
+@ToString
 @NoArgsConstructor
-public class DeviceVO {
+public class SimpleDeviceVO {
+    private int deviceId;
+
     private int groupId;
-    private List<Integer> modelIds;
+
     private String deviceName;
+
+    private int deviceStatus;
+
+    private int isOnline;
+
     private String protocol;
+
     private String ipAddress;
-    private String deviceDescription;
+
+
 
 }

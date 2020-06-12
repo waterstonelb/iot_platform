@@ -24,6 +24,7 @@ public class ModelServiceImpl implements ModelService {
     this.modelRepository = modelRepository;
   }
 
+  @Override
   @Transactional
   public ResponseVO<String> addModel(ModelVO modelVO) {
     try{
@@ -36,6 +37,7 @@ public class ModelServiceImpl implements ModelService {
     }
   }
 
+  @Override
   @Transactional
   public ResponseVO<String> updateModel(int modelId, ModelVO modelVO) {
     try{
@@ -49,6 +51,7 @@ public class ModelServiceImpl implements ModelService {
     }
   }
 
+  @Override
   @Transactional
   public ResponseVO<String> deleteModel(int modelId) {
     try{
@@ -60,6 +63,7 @@ public class ModelServiceImpl implements ModelService {
     }
   }
 
+  @Override
   public ResponseVO<List<ModelDo>> findAllModel(int page, int size) {
     try{
       PageRequest pageRequest=PageRequest.of(page, size);
@@ -70,6 +74,7 @@ public class ModelServiceImpl implements ModelService {
     }
   }
 
+  @Override
   public ResponseVO<ModelDo> findModel(int modelId) {
     try{
       return ResponseVO.buildSuccess(modelRepository.findByModelId(modelId));

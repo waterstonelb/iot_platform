@@ -5,7 +5,6 @@ import com.example.iot_manager.service.ManagerService;
 import com.example.iot_manager.vo.DataTransVO;
 import com.example.iot_manager.vo.ResponseVO;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,10 +27,13 @@ public class ManagerController {
   }
 
   @ApiOperation("设备数据传输")
-  @PostMapping("/online")
-  public ResponseVO<String> notifyDeviceOnlineStatus(@RequestBody DataTransVO dataTransVO){
+  @PostMapping("/transfor")
+  public ResponseVO<String> transforData(@RequestBody DataTransVO dataTransVO){
     if(!checkParam(dataTransVO))
       return ResponseVO.buildFailure("参数错误，请检查id，time，属性 是否为空");
+    /*
+    向data service传递数据
+     */
     serviceClient.addDevicedata(managerService.setAttr(dataTransVO));
     return ResponseVO.buildSuccess("success");
   }

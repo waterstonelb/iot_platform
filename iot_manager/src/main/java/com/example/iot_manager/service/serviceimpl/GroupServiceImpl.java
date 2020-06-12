@@ -22,6 +22,7 @@ public class GroupServiceImpl implements GroupService {
     this.groupRepository = groupRepository;
   }
 
+  @Override
   @Transactional
   public ResponseVO<String> addGroup(GroupVO groupVO) {
     try{
@@ -35,6 +36,7 @@ public class GroupServiceImpl implements GroupService {
     }
   }
 
+  @Override
   @Transactional
   public ResponseVO<String> updateGroup(int groupId, GroupVO groupVO) {
     try{
@@ -48,6 +50,7 @@ public class GroupServiceImpl implements GroupService {
     }
   }
 
+  @Override
   public ResponseVO<List<GroupDo>> getAllGroup(int page, int size) {
     try{
       PageRequest pageRequest=PageRequest.of(page, size);
@@ -59,6 +62,7 @@ public class GroupServiceImpl implements GroupService {
     }
   }
 
+  @Override
   public ResponseVO<GroupDo> getGroup(int groupId) {
     try{
       return ResponseVO.buildSuccess(groupRepository.findByGroupId(groupId));
@@ -68,6 +72,7 @@ public class GroupServiceImpl implements GroupService {
     }
   }
 
+  @Override
   @Transactional
   public ResponseVO<String> deleteGroup(int groupId) {
     try{
