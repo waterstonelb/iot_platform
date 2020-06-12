@@ -11,6 +11,6 @@ import java.util.List;
 @Component
 public interface DataSourceMapper {
     void addDeviceData(int id,String name,double temperature,double press,String time,String ip);
-    void delete(@Param("name")String name);
+    void delete(String name);
     List<deviceData> getDeviceData(int id,String name,String time,String ip);
 }

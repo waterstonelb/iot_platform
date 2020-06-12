@@ -5,17 +5,20 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
+import java.sql.SQLSyntaxErrorException;
 import java.util.List;
 
 @Mapper
 @Component
 public interface AnalyzeMapper {
-    List<deviceData> getDataByTime(@Param("name")String name,@Param("time1") String time1,@Param("time2") String time2);
-    List<deviceData> getDeviceData(@Param("name")String name);
-    List<deviceData> getDeviceDataByTime1(@Param("name") String name,@Param("temp1")double temp1,@Param("temp2") double temp2,@Param("press1")double press1,@Param("press2") double press2,@Param("time1") String time1,@Param("time2") String time2);
-    List<deviceData> getDeviceDataByTime2(@Param("name") String name,@Param("temp1")double temp1,@Param("temp2") double temp2,@Param("press1")double press1,@Param("press2") double press2,@Param("time1") String time1,@Param("time2") String time2);
-    List<deviceData> getDeviceDataByTemp1(@Param("name") String name,@Param("temp1")double temp1,@Param("temp2") double temp2,@Param("press1")double press1,@Param("press2") double press2,@Param("time1") String time1,@Param("time2") String time2);
-    List<deviceData> getDeviceDataByTemp2(@Param("name") String name,@Param("temp1")double temp1,@Param("temp2") double temp2,@Param("press1")double press1,@Param("press2") double press2,@Param("time1") String time1,@Param("time2") String time2);
-    List<deviceData> getDeviceDataByPress1(@Param("name") String name,@Param("temp1")double temp1,@Param("temp2") double temp2,@Param("press1")double press1,@Param("press2") double press2,@Param("time1") String time1,@Param("time2") String time2);
-    List<deviceData> getDeviceDataByPress2(@Param("name") String name,@Param("temp1")double temp1,@Param("temp2") double temp2,@Param("press1")double press1,@Param("press2") double press2,@Param("time1") String time1,@Param("time2") String time2);
+    List<deviceData> getDataByTime(String name,String time1,String time2);
+    List<deviceData> getDeviceData(String name);
+    List<deviceData> getDeviceDataByTime1(String name,double temp1,double temp2,double press1, double press2, String time1, String time2);
+    List<deviceData> getDeviceDataByTime2(String name,double temp1,double temp2,double press1, double press2, String time1, String time2);
+    List<deviceData> getDeviceDataByTemp1(String name,double temp1,double temp2,double press1,double press2, String time1, String time2);
+    List<deviceData> getDeviceDataByTemp2(String name,double temp1,double temp2,double press1,double press2, String time1, String time2);
+    List<deviceData> getDeviceDataByPress1(String name,double temp1,double temp2,double press1,double press2, String time1, String time2);
+    List<deviceData> getDeviceDataByPress2(String name,double temp1,double temp2,double press1, double press2, String time1,String time2);
+
+    List<deviceData> sqlAnalyze(String sql) throws SQLSyntaxErrorException;
 }

@@ -6,6 +6,8 @@ import com.example.iot_data.service.AnalyzeInter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
+import java.sql.SQLSyntaxErrorException;
 import java.util.List;
 
 @Service
@@ -44,5 +46,10 @@ public class AnalyzeImpl implements AnalyzeInter {
             else
                 return analyzeMapper.getDeviceDataByPress2(name,temperature1,temperature2,press1,press2,time1,time2);
         }
+    }
+
+    @Override
+    public List<deviceData> sqlAnalyze(String sql) throws SQLSyntaxErrorException{
+        return analyzeMapper.sqlAnalyze(sql);
     }
 }

@@ -1,5 +1,7 @@
 package com.example.iot_data.controller;
 
+import com.example.iot_data.po.deviceData;
+import com.example.iot_data.po.deviceDataList;
 import com.example.iot_data.service.DataSourceInter;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 public class DataSourceController {
@@ -16,9 +20,8 @@ public class DataSourceController {
 
     @RequestMapping(value={"/addDeviceData"},method=RequestMethod.POST)
     @ResponseBody
-    public int addDeviceData(@RequestBody(required=false) String name){
-
-        return dataSourceInter.addDeviceData(name.substring(1,name.length()-1));
+    public int addDeviceData(@RequestBody deviceDataList data){
+        return dataSourceInter.addDeviceData(data);
     }
 
     @RequestMapping(value={"/deleteDeviceData"},method=RequestMethod.POST)

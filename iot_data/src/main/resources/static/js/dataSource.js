@@ -48,18 +48,35 @@ $(document).ready(function(){
 
     $('.Form').on('click','#btn1',function(){
         var name=$('#devicename').val();
+        alert(name);
+        var list=[];
+        var map={name:name};
+        var data=new Object();
+        data.name=name;
+        data.id=1;
+        data.temperature=11.1;
+        data.press=23.33;
+        data.time='234';
+        data.ip='23d';
+        list.push(data);
+
         $.ajax({
             type:'POST',
             url: '/addDeviceData',
-            data: JSON.stringify(name),
+            data: JSON.stringify({
+                list:list
+            }),
+            contentType: "application/json",
+            dataType:"json",
             asnyc: true,
             success:function(res){
+                alert(res);
                 $('#deviceForm').hide();
                 $('#devicename').val('');
                 getDeviceList();
             },
             error:function(res){
-                alert('failure');
+                alert(res);
             }
         })
     })

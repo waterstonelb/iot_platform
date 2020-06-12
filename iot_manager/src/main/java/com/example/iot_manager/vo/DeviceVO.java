@@ -10,9 +10,9 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DeviceVO {
-    private int modelId;
     private int groupId;
     private String deviceName;
     private String protocol;
+    private String ipAddress;
     private String deviceDescription;
 }
