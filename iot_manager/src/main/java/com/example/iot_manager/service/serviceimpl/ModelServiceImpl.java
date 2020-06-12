@@ -5,14 +5,13 @@ import com.example.iot_manager.data.ModelDo;
 import com.example.iot_manager.service.ModelService;
 import com.example.iot_manager.vo.ModelVO;
 import com.example.iot_manager.vo.ResponseVO;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
+
+import javax.transaction.Transactional;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class ModelServiceImpl implements ModelService {
@@ -64,8 +63,6 @@ public class ModelServiceImpl implements ModelService {
   public ResponseVO<List<ModelDo>> findAllModel(int page, int size) {
     try{
       PageRequest pageRequest=PageRequest.of(page, size);
-      List<String> list=new ArrayList<>();
-      CollectionUtils.arrayToList();
       return ResponseVO.buildSuccess(modelRepository.findAll(pageRequest).getContent());
     }catch (Exception e){
       e.printStackTrace();
