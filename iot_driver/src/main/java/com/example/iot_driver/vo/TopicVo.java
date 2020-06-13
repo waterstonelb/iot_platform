@@ -1,5 +1,12 @@
 package com.example.iot_driver.vo;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
 public class TopicVo {
 
     private Integer deviceId;
@@ -12,43 +19,6 @@ public class TopicVo {
 
     private Integer qos;
 
-    public Integer getQos() {
-        return qos;
-    }
+    private Integer level;
 
-    public void setQos(Integer qos) {
-        this.qos = qos;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Integer getDeviceId() {
-        return deviceId;
-    }
-
-    public void setDeviceId(Integer deviceId) {
-        this.deviceId = deviceId;
-    }
-
-    public String getTopicName() {
-        return topicName;
-    }
-
-    public void setTopicName(String topicName) {
-        this.topicName = topicName;
-    }
-
-    public String getDescribe() {
-        return describe;
-    }
-
-    public void setDescribe(String describe) {
-        this.describe = describe;
-    }
 }

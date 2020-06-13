@@ -46,6 +46,21 @@
         where device_id = #{deviceId}
     </select>
 
+    <insert id="addDevice" parameterType="java.util.List">
+        insert into topic(topic_name,device_id,`describe`,qos,type, `level`)
+        values 
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+                #{item.topicName},
+                #{item.deviceId},
+                #{item.describe},
+                #{item.qos},
+                #{item.type},
+                #{item.level}
+            )
+        </foreach>
+    </insert>
+
     <resultMap id="statusAndQos" type="HashMap">
         <result column="qos" property="qos" javaType="java.lang.Integer"></result>
         <result column="status" property="status" javaType="java.lang.Integer"></result>

@@ -1,13 +1,15 @@
 package com.example.iot_driver.service.impl;
 
+import com.example.iot_driver.data.TopicMapper;
 import com.example.iot_driver.service.ICoreServiceInner;
-import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CoreServiceInner implements ICoreServiceInner {
 
-    private MqttClient mqttClient;
+    @Autowired
+    private TopicMapper topicMapper;
 
     @Override
     public boolean initSub(){
@@ -18,19 +20,14 @@ public class CoreServiceInner implements ICoreServiceInner {
     // 这里判断主题是否有效
     @Override
     public boolean isValidTopic(String topic) {
-        String[] topicList = topic.split("/");
-        if (topicList.length > 2){
+        int deviceId = topicMapper.getDeviceIdByTopic(topic);
+        System.out.println(deviceId);
+        if (deviceId == -1){
             System.out.println("无效主题");
             return false;
         }else {
-            if (!topicList[1].equals("numerical") &&
-            !topicList[1].equals("string") &&
-            !topicList[1].equals("position")){
-                System.out.println("无效主题");
-                return false;
-            }else {
-                return true;
-            }
+            System.out.println("主题有效");
+            return true;
         }
     }
 

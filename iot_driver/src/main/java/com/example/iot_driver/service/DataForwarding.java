@@ -1,6 +1,7 @@
 package com.example.iot_driver.service;
 
 import com.example.iot_driver.client.IotRuleFeignClient;
+import com.example.iot_driver.vo.ResponseEntity;
 import com.example.iot_driver.vo.TopicPO;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
@@ -27,8 +28,12 @@ public class DataForwarding {
 
         topicPO.setTopic(topic);
         topicPO.setMap(hashMap);
+        try {
+            ResponseEntity<TopicPO> entity = iotRuleFeignClient.receiveDataTest(topicPO);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
-        System.out.println(iotRuleFeignClient.receiveDataTest(topicPO).toString());
     }
 
     public static Map<String,Object> getStringToMap(String str){

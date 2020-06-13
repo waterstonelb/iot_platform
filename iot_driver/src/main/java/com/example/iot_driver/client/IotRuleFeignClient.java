@@ -1,8 +1,8 @@
 package com.example.iot_driver.client;
 
+import com.example.iot_driver.vo.ResponseEntity;
 import com.example.iot_driver.vo.TopicPO;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
