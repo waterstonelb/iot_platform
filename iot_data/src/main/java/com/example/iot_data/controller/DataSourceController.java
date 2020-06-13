@@ -18,6 +18,10 @@ public class DataSourceController {
     @Autowired
     private DataSourceInter dataSourceInter;
 
+    public DataSourceController(DataSourceInter dataSourceInter){
+        this.dataSourceInter=dataSourceInter;
+    }
+
     @RequestMapping(value={"/addDeviceData"},method=RequestMethod.POST)
     @ResponseBody
     public int addDeviceData(@RequestBody deviceDataList data){

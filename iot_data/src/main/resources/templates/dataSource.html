@@ -13,8 +13,8 @@
     <div class="head">
         <ul id="menu">
             <li><a onclick="javascript:history.back(-1);">< Back</a></li>
-            <li><a href="dataAsset">数据资产</a></li>
             <li class="active"><a href="#">数据源</a></li>
+            <li><a href="dataAsset">数据资产</a></li>
             <li><a href="analyze">分析透视</a></li>
             <li><a href="stream">流数据处理</a></li>
             <li><a href="monitor">智能监测</a></li>
@@ -24,19 +24,13 @@
 
     <div class="container" style="margin-left: 10px">
         <div class="container-head">
-            <div class="category" style="background-color:darkgrey;width:50%;margin:0px">设备数据</div>
-            <div class="category" style="width:50%;margin:0px">外部数据</div>
+            <div class="category" style="margin-left:10px">设备数据</div>
         </div>
         <div class="container-body">
             <div class='add'>
-                <button type='button' id='addDeviceData'> + 添加设备数据</button>
+                <button type='button' id='addExternalData'> + 添加外部数据</button>
             </div>
-            <div class="Form" id="deviceForm">
-                <form>
-                    <p  class="namepwd">设备名称：<input type="text" id="devicename"></p>
-                    <p  class="namepwd"><button type="button" id="btn1">确认</button></p>
-                </form>
-            </div>
+
             <div class="Form" id="fileForm">
                 <form>
                     <p  class="namepwd">文件路径：<input type="text" id="filepath"></p>

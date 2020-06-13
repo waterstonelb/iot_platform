@@ -17,9 +17,13 @@ public class DataAssetController {
     @Autowired
     private DataAssetInter dataAssetInter;
 
+    public DataAssetController(DataAssetInter dataAssetInter){
+        this.dataAssetInter=dataAssetInter;
+    }
+
     @RequestMapping(value={"/getData"},method= RequestMethod.POST)
     @ResponseBody
-    public List<deviceData> getData(@RequestBody String name){
+    public List<deviceData> getDataByName(@RequestBody String name){
         return dataAssetInter.getData(name.substring(1,name.length()-1));
     }
 
@@ -29,9 +33,9 @@ public class DataAssetController {
         return dataAssetInter.getDevice();
     }
 
-    @GetMapping
+    @RequestMapping
     public String toIndex(){
-        return "dataAsset.html";
+        return "dataSource.html";
     }
 
     @RequestMapping("/dataAsset")

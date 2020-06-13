@@ -17,6 +17,10 @@ public class AnalyzeController {
     @Autowired
     private AnalyzeInter analyzeInter;
 
+    public AnalyzeController(AnalyzeInter analyzeInter){
+        this.analyzeInter=analyzeInter;
+    }
+
     @RequestMapping(value={"/timeAnalyze"},method= RequestMethod.POST)
     @ResponseBody
     public List<deviceData> getDataByTime(@RequestBody Map<String,String> data){
