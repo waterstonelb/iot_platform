@@ -17,9 +17,13 @@ public class DataForwarding {
     @Autowired
     private IotRuleFeignClient iotRuleFeignClient;
 
-    public void transport(String topic, String message){
-        TopicPO topicPO = new TopicPO();
+    public void receiveData(String topic, String message){
 
+    }
+
+    public void transport(String topic, String message){
+
+        TopicPO topicPO = new TopicPO();
         Gson gson = new Gson();
         Map<String, Object> hashMap = new HashMap<String, Object>();
         hashMap = gson.fromJson(message, new TypeToken<Map<String, Object>>() {

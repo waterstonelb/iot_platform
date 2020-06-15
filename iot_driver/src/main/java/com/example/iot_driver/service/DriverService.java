@@ -50,38 +50,38 @@ public class DriverService {
 //        return ResponseVO.buildSuccess(driverMapper.getConnectInfo(deviceId));
 //    }
 
-    public ResponseVO deviceOnline(String deviceId){
-        String[] topic = new String[] {deviceId+ "/+"};
-        int qos = driverMapper.getQosById(deviceId);
-        boolean b = coreServiceOuter.addSub(topic, qos);
-        if (b){
-            // 1表示设备在线
-            int n = driverMapper.updateStatus(1, deviceId);
-            if (n > 0){
-                return ResponseVO.buildSuccess("设备上线成功");
-            }else {
-                return ResponseVO.buildFailure("设备状态更新失败");
-            }
-        }else {
-            return ResponseVO.buildFailure("订阅设备主题失败");
-        }
-    }
-
-    public ResponseVO deviceOffline(String deviceId){
-        String[] topic = new String[] {deviceId+ "/+"};
-        boolean success = coreServiceOuter.removeSub(topic);
-        if (success){
-            // 0表示设备离线
-            int n = driverMapper.updateStatus(0, deviceId);
-            if (n > 0){
-                return ResponseVO.buildSuccess("设备离线成功");
-            }else {
-                return ResponseVO.buildFailure("设备状态更新失败");
-            }
-        }else {
-            return ResponseVO.buildFailure("取消订阅设备主题失败");
-        }
-    }
+//    public ResponseVO deviceOnline(String deviceId){
+//        String[] topic = new String[] {deviceId+ "/+"};
+//        int qos = driverMapper.getQosById(deviceId);
+//        boolean b = coreServiceOuter.addSub(topic, qos);
+//        if (b){
+//            // 1表示设备在线
+//            int n = driverMapper.updateStatus(1, deviceId);
+//            if (n > 0){
+//                return ResponseVO.buildSuccess("设备上线成功");
+//            }else {
+//                return ResponseVO.buildFailure("设备状态更新失败");
+//            }
+//        }else {
+//            return ResponseVO.buildFailure("订阅设备主题失败");
+//        }
+//    }
+//
+//    public ResponseVO deviceOffline(String deviceId){
+//        String[] topic = new String[] {deviceId+ "/+"};
+//        boolean success = coreServiceOuter.removeSub(topic);
+//        if (success){
+//            // 0表示设备离线
+//            int n = driverMapper.updateStatus(0, deviceId);
+//            if (n > 0){
+//                return ResponseVO.buildSuccess("设备离线成功");
+//            }else {
+//                return ResponseVO.buildFailure("设备状态更新失败");
+//            }
+//        }else {
+//            return ResponseVO.buildFailure("取消订阅设备主题失败");
+//        }
+//    }
 
     public ResponseVO addDevice(SimpleDeviceVO deviceVO){
         int n = driverMapper.addDevice(creatTopic(deviceVO.getDeviceId()));
@@ -118,6 +118,19 @@ public class DriverService {
             return ResponseVO.buildSuccess("订阅成功");
         }else {
             return ResponseVO.buildFailure("订阅失败");
+        }
+    }
+
+    public ResponseVO disable(int deviceId){
+        List<Map<String, Object>> subList = topicMapper.getAllSub(deviceId);
+        String[] topics = new String[subList.size()];
+        for (int i=0;i<subList.size();i++){
+            topics[i] = (String) subList.get(i).get("topicName");
+        }
+        if (coreServiceOuter.removeSub(topics)){
+            return ResponseVO.buildSuccess("取消订阅成功");
+        }else {
+            return ResponseVO.buildFailure("取消订阅失败");
         }
     }
 

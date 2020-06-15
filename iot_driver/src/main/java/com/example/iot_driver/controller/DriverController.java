@@ -43,18 +43,18 @@ public class DriverController {
 //        return driverService.getConnectInfo(deviceId);
 //    }
 
-    /** 设备上线*/
-    @RequestMapping(value = "/{deviceId}/online",method = RequestMethod.GET)
-    public ResponseVO deviceOnline(@PathVariable("deviceId") String deviceId){
-        System.out.println(deviceId);
-        return driverService.deviceOnline(deviceId);
-    }
-
-    /** 设备下线*/
-    @RequestMapping(value = "/{deviceId}/offline", method = RequestMethod.GET)
-    public ResponseVO deviceOffline(@PathVariable("deviceId") String deviceId){
-        return driverService.deviceOffline(deviceId);
-    }
+//    /** 设备上线*/
+//    @RequestMapping(value = "/{deviceId}/online",method = RequestMethod.GET)
+//    public ResponseVO deviceOnline(@PathVariable("deviceId") String deviceId){
+//        System.out.println(deviceId);
+//        return driverService.deviceOnline(deviceId);
+//    }
+//
+//    /** 设备下线*/
+//    @RequestMapping(value = "/{deviceId}/offline", method = RequestMethod.GET)
+//    public ResponseVO deviceOffline(@PathVariable("deviceId") String deviceId){
+//        return driverService.deviceOffline(deviceId);
+//    }
 
     /** 向设备下发指令*/
     @RequestMapping(value = "/sendMsgTo/{deviceId}",method = RequestMethod.POST)
@@ -74,12 +74,24 @@ public class DriverController {
      * 激活设备
      * 平台订阅设备所有订阅请求
      */
-    @ApiOperation(value = "激活设备，平台订阅设备的所有订阅主题", notes = "暴露给设备管理的接口 设备激活时调用")
+    @ApiOperation(value = "激活设备或设备上线，平台订阅设备的所有订阅主题", notes = "暴露给设备管理的接口 设备激活时调用")
     @RequestMapping(value = "/activateDevice/{deviceId}", method = RequestMethod.GET)
     public ResponseVO activateDevice(@PathVariable("deviceId") int deviceId){
         System.out.println(deviceId);
         return driverService.activateDevice(deviceId);
     }
+
+    /**
+     * 禁用设备
+     * 平台取消对所有设备的订阅请求
+     * @return
+     */
+    @ApiOperation("禁用设备或设备下线调用  取消平台对设备的所有订阅请求")
+    @GetMapping("/disableDevice/{deviceId}")
+    public ResponseVO disable(@PathVariable("deviceId") int deviceId){
+        return driverService.disable(deviceId);
+    }
+
 
 //    @RequestMapping(value = "/hello/{deviceId}", method = RequestMethod.GET)
 //    public int hello(@PathVariable("deviceId") String deviceId){

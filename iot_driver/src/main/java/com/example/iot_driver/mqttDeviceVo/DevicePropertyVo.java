@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * 设备属性上报vo
+ * 请求设备属性与设备属性上报vo
  */
 @Setter
 @Getter
