@@ -97,7 +97,7 @@ INSERT INTO `manager_group` (`parent_id`,`group_description`,`group_name`) VALUE
 DROP TABLE IF EXISTS `device_model`;
 CREATE TABLE IF NOT EXISTS `device_model`(
                                 `device_id` int(11) NOT NULL,
-                                `model_id` int(11) NOT NULL
+                                `model_id` int(11) NOT NULL,
                                 PRIMARY KEY (`device_id`,`model_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 INSERT INTO `device_model` VALUES (1,1);

@@ -6,9 +6,9 @@ spring:
     name: iot-manager
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://101.200.189.184:3306/iot?useUnicode=true&characterEncoding=UTF-8
-    username: root
-    password: root
+    url: jdbc:mysql://ismzl.com:3306/iot?useUnicode=true&characterEncoding=UTF-8
+    username: iot
+    password: iot123
   jpa:
     hibernate:
       ddl-auto: update
