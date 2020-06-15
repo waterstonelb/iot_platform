@@ -56,13 +56,13 @@ public class DriverController {
 //        return driverService.deviceOffline(deviceId);
 //    }
 
-    /** 向设备下发指令*/
-    @RequestMapping(value = "/sendMsgTo/{deviceId}",method = RequestMethod.POST)
-    public ResponseVO sendMessageToDevice(@PathVariable("deviceId") String deviceId,
-                                          @RequestBody Map<String,String> message){
-        System.out.println(message);
-        return driverService.sendMessageToDevice(deviceId, message.get("message"));
-    }
+//    /** 向设备下发指令*/
+//    @RequestMapping(value = "/sendMsgTo/{deviceId}",method = RequestMethod.POST)
+//    public ResponseVO sendMessageToDevice(@PathVariable("deviceId") String deviceId,
+//                                          @RequestBody Map<String,String> message){
+//        System.out.println(message);
+//        return driverService.sendMessageToDevice(deviceId, message.get("message"));
+//    }
 
     @ApiOperation("新增设备时调用  为设备绑定系统默认主题")
     @PostMapping("/addDevice")
@@ -91,14 +91,6 @@ public class DriverController {
     public ResponseVO disable(@PathVariable("deviceId") int deviceId){
         return driverService.disable(deviceId);
     }
-
-
-//    @RequestMapping(value = "/hello/{deviceId}", method = RequestMethod.GET)
-//    public int hello(@PathVariable("deviceId") String deviceId){
-//        System.out.println(deviceId);
-//        return 0;
-//    }
-
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String hello(){

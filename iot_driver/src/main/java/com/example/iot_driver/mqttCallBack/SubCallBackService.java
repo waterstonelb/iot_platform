@@ -21,14 +21,10 @@ public class SubCallBackService {
 
     /** 设备消息处理*/
     public void messageHandle(String topic, String message){
-        System.out.println(topic);
-        System.out.println(message);
-        //dataForwarding.transport(topic, message);
         boolean isValid = coreServiceInner.isValidTopic(topic);
         if (isValid){
-//            saveService.saveMessage(topic, message);
             iotManagerFeign.receiveData(topic,message);
-            dataForwarding.transport(topic, message);
+            dataForwarding.receiveData(topic,message);
         }
     }
 

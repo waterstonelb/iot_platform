@@ -17,13 +17,11 @@ public class DriverService {
     @Autowired
     private ICoreServiceOuter coreServiceOuter;
 
-    @Autowired
-    private DriverMapper driverMapper;
+//    @Autowired
+//    private DriverMapper driverMapper;
 
     @Autowired
     private TopicMapper topicMapper;
-
-    private MqttDefaultTopics mqttDefaultTopics;
 
 //    public ResponseVO addConnect(DeviceConnectInfo deviceConnectInfo){
 //        if (driverMapper.addConnect(deviceConnectInfo) > 0){
@@ -84,7 +82,7 @@ public class DriverService {
 //    }
 
     public ResponseVO addDevice(SimpleDeviceVO deviceVO){
-        int n = driverMapper.addDevice(creatTopic(deviceVO.getDeviceId()));
+        int n = topicMapper.addDevice(creatTopic(deviceVO.getDeviceId()));
         if (n > 0){
             return ResponseVO.buildSuccess("插入成功");
         }else {
@@ -92,17 +90,17 @@ public class DriverService {
         }
     }
 
-    public ResponseVO sendMessageToDevice(String deviceId, String message){
-        HashMap hashMap = driverMapper.getStatusAndQos(deviceId);
-        System.out.println(hashMap.toString());
-        // 这里应该判断设备是否离线 离线则应该将数据发往影子设备
-        boolean success = coreServiceOuter.addPub(deviceId, (Integer) hashMap.get("qos"), message);
-        if (success){
-            return ResponseVO.buildSuccess("消息发送成功");
-        }else {
-            return ResponseVO.buildFailure("消息发送失败");
-        }
-    }
+//    public ResponseVO sendMessageToDevice(String deviceId, String message){
+//        HashMap hashMap = driverMapper.getStatusAndQos(deviceId);
+//        System.out.println(hashMap.toString());
+//        // 这里应该判断设备是否离线 离线则应该将数据发往影子设备
+//        boolean success = coreServiceOuter.addPub(deviceId, (Integer) hashMap.get("qos"), message);
+//        if (success){
+//            return ResponseVO.buildSuccess("消息发送成功");
+//        }else {
+//            return ResponseVO.buildFailure("消息发送失败");
+//        }
+//    }
 
     public ResponseVO activateDevice(int deviceId){
         List<Map<String, Object>> subList = topicMapper.getAllSub(deviceId);

@@ -19,18 +19,18 @@ public interface DriverMapper {
 //
 //    DeviceConnectInfo getConnectInfo(String deviceId);
 
-    HashMap getStatusAndQos(String deviceId);
-
-    /** 获得设备qos*/
-    int getQosById(String deviceId);
-
-    /** 更新设备在线状态*/
-    int updateStatus(@Param("status") int status, @Param("deviceId") String deviceId);
-
-    int addDevice(List<TopicVo> topicVos);
-
-
-    int getStatus(String deviceId);
-
-    List<String> getAllDeviceId();
+//    HashMap getStatusAndQos(String deviceId);
+//
+//    /** 获得设备qos*/
+//    int getQosById(String deviceId);
+//
+//    /** 更新设备在线状态*/
+//    int updateStatus(@Param("status") int status, @Param("deviceId") String deviceId);
+//
+////    int addDevice(List<TopicVo> topicVos);
+//
+//
+////    int getStatus(String deviceId);
+//
+//    List<String> getAllDeviceId();
 }

@@ -40,6 +40,21 @@
         where topic_name = #{topicName}
     </select>
 
+    <insert id="addDevice" parameterType="java.util.List">
+        insert into topic(topic_name,device_id,`describe`,qos,type, `level`)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.topicName},
+            #{item.deviceId},
+            #{item.describe},
+            #{item.qos},
+            #{item.type},
+            #{item.level}
+            )
+        </foreach>
+    </insert>
+
     <resultMap id="topicInfo" type="com.example.iot_driver.vo.TopicVo">
         <id column="topic_name" property="topicName"></id>
         <result column="device_id" property="deviceId"></result>

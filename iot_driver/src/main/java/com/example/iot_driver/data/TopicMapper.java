@@ -25,4 +25,6 @@ public interface TopicMapper {
     List<Map<String,Object>> getAllSub(int deviceId);
 
     int getDeviceIdByTopic(String topicName);
+
+    int addDevice(List<TopicVo> topicVos);
 }

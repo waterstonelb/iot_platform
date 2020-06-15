@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,6 +19,6 @@ public class DeviceTelemetryVo {
 
     private Integer deviceId;
 
-    private Map<String, Object> properties;
+    private Map<String,Object> properties;
 
 }

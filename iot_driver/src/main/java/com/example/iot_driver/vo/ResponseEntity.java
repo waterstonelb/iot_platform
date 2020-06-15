@@ -1,7 +1,9 @@
 package com.example.iot_driver.vo;
 
 import com.github.pagehelper.PageInfo;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -16,6 +18,8 @@ import java.util.List;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ResponseEntity<T> {
 
     private String msg;
