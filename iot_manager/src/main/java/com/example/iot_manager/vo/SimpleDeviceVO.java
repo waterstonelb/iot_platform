@@ -1,5 +1,6 @@
 package com.example.iot_manager.vo;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,6 @@ public class SimpleDeviceVO {
 
     private String ipAddress;
 
-
+    private List<Integer> modelIds;
 
 }

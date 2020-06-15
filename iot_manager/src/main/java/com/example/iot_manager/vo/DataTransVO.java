@@ -1,6 +1,7 @@
 package com.example.iot_manager.vo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.Date;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,7 +20,7 @@ public class DataTransVO {
   private String name;
 
   @JsonIgnoreProperties
-  private Data time;
+  private Date time;
 
   @JsonIgnoreProperties
   private String ip;
