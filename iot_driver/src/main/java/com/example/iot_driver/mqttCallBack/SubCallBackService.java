@@ -3,7 +3,6 @@ package com.example.iot_driver.mqttCallBack;
 import com.example.iot_driver.service.DataForwarding;
 import com.example.iot_driver.service.ICoreServiceInner;
 import com.example.iot_driver.service.IotManagerFeignImpl;
-import com.example.iot_driver.service.SaveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +12,6 @@ public class SubCallBackService {
     @Autowired
     private ICoreServiceInner coreServiceInner;
 
-//    @Autowired
-//    private SaveService saveService;
 
     @Autowired
     private DataForwarding dataForwarding;

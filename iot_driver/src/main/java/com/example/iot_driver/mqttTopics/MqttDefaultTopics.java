@@ -15,7 +15,7 @@ public class MqttDefaultTopics {
     public static final String DEVICE_ATTRIBUTES_REQUEST = "iot/attributes/request";
 
     // 设备属性响应
-    public static final String DEVICE_ATTRIBUTES_RESPONSE = "iot/attributes/request";
+    public static final String DEVICE_ATTRIBUTES_RESPONSE = "iot/attributes/response";
 
     // 向设备下发指令
     public static final String DEVICE_INSTRUCTION_REQUEST = "iot/instruction/request";

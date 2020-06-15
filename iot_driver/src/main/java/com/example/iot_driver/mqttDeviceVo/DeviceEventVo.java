@@ -20,4 +20,5 @@ public class DeviceEventVo {
     private Timestamp timestamp;
 
     private String eventDescribe;
+
 }
