@@ -63,7 +63,7 @@ public class DeviceServiceImpl implements DeviceService {
       SimpleDeviceVO simpleDeviceVO = new SimpleDeviceVO();
       BeanUtils.copyProperties(resDo, simpleDeviceVO);
       log.info(simpleDeviceVO.toString());
-      //driverServiceClient.addDevice(simpleDeviceVO);
+      driverServiceClient.addDevice(simpleDeviceVO);
 
       /*
       加入模型信息
