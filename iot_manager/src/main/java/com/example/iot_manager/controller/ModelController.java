@@ -3,6 +3,7 @@ package com.example.iot_manager.controller;
 import com.example.iot_manager.data.ModelDo;
 import com.example.iot_manager.service.ModelService;
 import com.example.iot_manager.vo.ModelVO;
+import com.example.iot_manager.vo.PageResult;
 import com.example.iot_manager.vo.ResponseVO;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
@@ -47,9 +48,9 @@ public class ModelController {
     return modelService.deleteModel(modelId);
   }
 
-  @ApiOperation("获取全部组")
+  @ApiOperation("获取全部模型")
   @GetMapping("/getall")
-  public ResponseVO<List<ModelDo>> getAllModel(int page, int size){
+  public ResponseVO<PageResult<ModelDo>> getAllModel(int page, int size){
     return modelService.findAllModel(page, size);
   }
 

@@ -14,6 +14,7 @@ import javax.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,8 @@ public class DeviceServiceImpl implements DeviceService {
   final DeviceModelRepository deviceModelRepository;
 
   @Autowired
-  public DeviceServiceImpl(DeviceRepository deviceRepository, ShadowService shadowService, DriverServiceClient driverServiceClient, DeviceModelRepository deviceModelRepository) {
+  public DeviceServiceImpl(DeviceRepository deviceRepository, ShadowService shadowService,
+      DriverServiceClient driverServiceClient, DeviceModelRepository deviceModelRepository) {
     this.deviceRepository = deviceRepository;
     this.shadowService = shadowService;
     this.driverServiceClient = driverServiceClient;
@@ -45,8 +47,8 @@ public class DeviceServiceImpl implements DeviceService {
     try {
       DeviceDo deviceDo = new DeviceDo();
       deviceDo.setDeviceVO(deviceVO);
-      DeviceDo resDo=deviceRepository.save(deviceDo);
-      int deviceId=resDo.getDeviceId();
+      DeviceDo resDo = deviceRepository.save(deviceDo);
+      int deviceId = resDo.getDeviceId();
       /*
       生成初始影子信息
        */
@@ -59,14 +61,15 @@ public class DeviceServiceImpl implements DeviceService {
       hook到连接管理，激活设备
        */
       SimpleDeviceVO simpleDeviceVO = new SimpleDeviceVO();
-      BeanUtils.copyProperties(resDo,simpleDeviceVO);
+      BeanUtils.copyProperties(resDo, simpleDeviceVO);
       log.info(simpleDeviceVO.toString());
       //driverServiceClient.addDevice(simpleDeviceVO);
 
       /*
       加入模型信息
        */
-      deviceVO.getModelIds().forEach(t->deviceModelRepository.save(new DeviceModelDo(deviceId,t)));
+      deviceVO.getModelIds()
+          .forEach(t -> deviceModelRepository.save(new DeviceModelDo(deviceId, t)));
 
       return ResponseVO.buildSuccess("add success");
     } catch (Exception e) {
@@ -138,11 +141,12 @@ public class DeviceServiceImpl implements DeviceService {
   }
 
   @Override
-  public ResponseVO<List<DeviceDo>> getAllDevice(int page, int size) {
+  public ResponseVO<PageResult<DeviceDo>> getAllDevice(int page, int size) {
     try {
       PageRequest pageRequest = PageRequest.of(page, size);
-      List<DeviceDo> deviceDoList = deviceRepository.findAllDevice(pageRequest).getContent();
-      return ResponseVO.buildSuccess(deviceDoList);
+      Page<DeviceDo> deviceDoList = deviceRepository.findAllDevice(pageRequest);
+      return ResponseVO.buildSuccess(
+          PageResult.createPageResult(deviceDoList.getContent(), deviceDoList.getTotalElements()));
     } catch (Exception e) {
       e.printStackTrace();
       return ResponseVO.buildFailure("Fail");
@@ -161,12 +165,14 @@ public class DeviceServiceImpl implements DeviceService {
   }
 
   @Override
-  public ResponseVO<List<DeviceDo>> getDeviceByNameLike(String deviceName, int page, int size) {
+  public ResponseVO<PageResult<DeviceDo>> getDeviceByNameLike(String deviceName, int page,
+      int size) {
     try {
       PageRequest pageRequest = PageRequest.of(page, size);
-      List<DeviceDo> deviceDoList = deviceRepository
-          .findByDeviceNameLike("%" + deviceName + "%", pageRequest).getContent();
-      return ResponseVO.buildSuccess(deviceDoList);
+      Page<DeviceDo> deviceDoPage = deviceRepository
+          .findByDeviceNameLike("%" + deviceName + "%", pageRequest);
+      return ResponseVO.buildSuccess(
+          PageResult.createPageResult(deviceDoPage.getContent(), deviceDoPage.getTotalElements()));
     } catch (Exception e) {
       e.printStackTrace();
       return ResponseVO.buildFailure("Fail");
@@ -174,13 +180,15 @@ public class DeviceServiceImpl implements DeviceService {
   }
 
   @Override
-  public ResponseVO<List<DeviceGroupVO>> getDeviceInGroup(int groupId, int page, int size) {
+  public ResponseVO<PageResult<DeviceGroupVO>> getDeviceInGroup(int groupId, int page, int size) {
     try {
       PageRequest pageRequest = PageRequest.of(page, size);
-      List<DeviceDo> list = deviceRepository.findByGroupId(groupId, pageRequest).getContent();
-      List<DeviceGroupVO> deviceGroupVOS = list.stream().map(DeviceDo::transfor).collect(Collectors.toList());
-      return ResponseVO.buildSuccess(deviceGroupVOS);
-    }catch (Exception e){
+      Page<DeviceDo> list = deviceRepository.findByGroupId(groupId, pageRequest);
+      List<DeviceGroupVO> deviceGroupVOS = list.stream().map(DeviceDo::transfor)
+          .collect(Collectors.toList());
+      return ResponseVO.buildSuccess(
+          PageResult.createPageResult(deviceGroupVOS,list.getTotalElements()));
+    } catch (Exception e) {
       e.printStackTrace();
       return ResponseVO.buildFailure("Fail");
     }

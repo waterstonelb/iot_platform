@@ -1,9 +1,11 @@
 package com.example.iot_manager.controller;
 
+import com.example.iot_manager.config.ParamCheck;
 import com.example.iot_manager.data.DeviceDo;
 import com.example.iot_manager.service.DeviceService;
 import com.example.iot_manager.vo.DeviceGroupVO;
 import com.example.iot_manager.vo.DeviceVO;
+import com.example.iot_manager.vo.PageResult;
 import com.example.iot_manager.vo.ResponseVO;
 import com.example.iot_manager.vo.StatusVO;
 import io.swagger.annotations.ApiOperation;
@@ -37,15 +39,16 @@ public class DeviceController {
     return deviceService.getDeviceById(deviceId);
   }
 
+  @ParamCheck
   @ApiOperation("获取全部设备信息（分页）")
   @GetMapping("/getall")
-  public ResponseVO<List<DeviceDo>> getAllDevice(int page, int size) {
+  public ResponseVO<PageResult<DeviceDo>> getAllDevice(int page,int size) {
     return deviceService.getAllDevice(page, size);
   }
 
   @ApiOperation("模糊deviceName查询设备（分页）")
   @GetMapping("/getbyname")
-  public ResponseVO<List<DeviceDo>> getDeviceByName(String name, int page, int size) {
+  public ResponseVO<PageResult<DeviceDo>> getDeviceByName(String name, int page, int size) {
     return deviceService.getDeviceByNameLike(name, page, size);
   }
 
@@ -89,7 +92,7 @@ public class DeviceController {
 
   @ApiOperation("获取组内设备")
   @GetMapping("/groupdevice")
-  public ResponseVO<List<DeviceGroupVO>> getDeviceInGroup(int groupId,int page ,int size){
+  public ResponseVO<PageResult<DeviceGroupVO>> getDeviceInGroup(int groupId,int page ,int size){
     return deviceService.getDeviceInGroup(groupId, page, size);
   }
 
