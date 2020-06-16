@@ -5,7 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient("IOT-DATA")
+@FeignClient("iot-data")
 public interface DataServiceClient {
 
   @PostMapping("/addDeviceData")
