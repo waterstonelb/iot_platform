@@ -80,7 +80,7 @@ public class IotManagerFeignImpl {
         Date date = new Date();
         DataTransVO transVO = new DataTransVO();
         transVO.setId(telemetryVo.getDeviceId());
-        transVO.setModelVOS(modelVOList);
+        transVO.setModelVOs(modelVOList);
         transVO.setTime(date);
         try {
             System.out.println(transVO.toString());
