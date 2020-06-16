@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface DataServiceClient {
 
   @PostMapping("/addDeviceData")
-  int addDevicedata(@RequestBody DataTransList list);
+  int addDevicedata(@RequestBody DataTransList data);
 
 }
