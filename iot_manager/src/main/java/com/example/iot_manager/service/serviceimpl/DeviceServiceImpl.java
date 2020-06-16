@@ -63,8 +63,8 @@ public class DeviceServiceImpl implements DeviceService {
       SimpleDeviceVO simpleDeviceVO = new SimpleDeviceVO();
       BeanUtils.copyProperties(resDo, simpleDeviceVO);
       log.info(simpleDeviceVO.toString());
-      driverServiceClient.addDevice(simpleDeviceVO);
-
+      String res = driverServiceClient.addDevice(simpleDeviceVO);
+      log.info(res);
       /*
       加入模型信息
        */
@@ -95,6 +95,8 @@ public class DeviceServiceImpl implements DeviceService {
   public ResponseVO<String> deleteDevice(int deviceId) {
     try {
       deviceRepository.deleteByDeviceId(deviceId);
+      String res = driverServiceClient.notifyDownlinfe(deviceId);
+      log.info(res);
       return ResponseVO.buildSuccess("delete success");
     } catch (Exception e) {
       e.printStackTrace();
@@ -120,6 +122,15 @@ public class DeviceServiceImpl implements DeviceService {
   @Transactional
   public ResponseVO<String> updateStatus(int status, int deviceId) {
     try {
+      if(status == 0){
+        String res = driverServiceClient.notifyDownlinfe(deviceId);
+        log.info(res);
+
+      }else {
+        String res = driverServiceClient.notifyOnline(deviceId);
+        log.info(res);
+
+      }
       deviceRepository.updateDeviceStatus(status, deviceId);
       return ResponseVO.buildSuccess("update success");
     } catch (Exception e) {
@@ -132,6 +143,15 @@ public class DeviceServiceImpl implements DeviceService {
   @Transactional
   public ResponseVO<String> updateOnline(int isOnline, int deviceId) {
     try {
+      if(isOnline == 0){
+        String res = driverServiceClient.notifyDownlinfe(deviceId);
+        log.info(res);
+
+      }else {
+        String res = driverServiceClient.notifyOnline(deviceId);
+        log.info(res);
+
+      }
       deviceRepository.updateIsOnline(isOnline, deviceId, new Date());
       return ResponseVO.buildSuccess("update success");
     } catch (Exception e) {
