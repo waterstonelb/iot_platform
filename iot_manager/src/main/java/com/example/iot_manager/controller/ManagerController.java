@@ -46,7 +46,7 @@ public class ManagerController {
   }
 
   private boolean checkParam(DataTransVO dataTransVO){
-    return null != dataTransVO.getId() && null != dataTransVO.getTime() && !CollectionUtils.isEmpty(dataTransVO.getModelVOS());
+    return null != dataTransVO.getId() && null != dataTransVO.getTime() && !CollectionUtils.isEmpty(dataTransVO.getModelVOs());
   }
 
 }

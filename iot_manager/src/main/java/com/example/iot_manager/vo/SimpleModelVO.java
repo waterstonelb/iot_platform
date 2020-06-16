@@ -13,7 +13,7 @@ public class SimpleModelVO {
 
   private String name;
 
-  private int num;
+  private double num;
 
 
 

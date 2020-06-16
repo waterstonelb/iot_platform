@@ -28,7 +28,7 @@ public class ManagerServiceImpl implements ManagerService {
     /*
     注入物模型参数
      */
-    dataTransVO.getModelVOS().forEach(m->{
+    dataTransVO.getModelVOs().forEach(m->{
       ModelDo modelDo = modelRepository.findByModelId(m.getModelId());
       m.setName(modelDo.getAttrName());
     });

@@ -16,7 +16,7 @@ public class DataTransVO {
 
   private Integer id;
 
-  private List<SimpleModelVO> modelVOS;
+  private List<SimpleModelVO> modelVOs;
 
   private String name;
 

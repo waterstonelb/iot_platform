@@ -7,6 +7,7 @@ import com.example.iot_data.po.deviceData;
 
 import com.example.iot_data.po.deviceDataList;
 import com.example.iot_data.service.DataSourceInter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -26,7 +27,6 @@ public class DataSourceImpl implements DataSourceInter {
     public int addDeviceData(deviceDataList data){
         List<DataTransVO> newList=data.getList();
         int count=0;
-
         if(newList!=null) {
 
             for (int i = 0; i < newList.size(); i++) {
