@@ -2,12 +2,14 @@ package com.example.iot_manager.controller;
 
 import com.example.iot_manager.data.DeviceDo;
 import com.example.iot_manager.service.DeviceService;
+import com.example.iot_manager.vo.DeviceGroupVO;
 import com.example.iot_manager.vo.DeviceVO;
 import com.example.iot_manager.vo.ResponseVO;
 import com.example.iot_manager.vo.StatusVO;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/device")
 public class DeviceController {
@@ -82,6 +85,12 @@ public class DeviceController {
   @PostMapping("updateonline")
   public ResponseVO<String> updateOnline(@RequestBody StatusVO statusVO) {
     return deviceService.updateOnline(statusVO.getStatus(), statusVO.getDeviceId());
+  }
+
+  @ApiOperation("获取组内设备")
+  @GetMapping("/groupdevice")
+  public ResponseVO<List<DeviceGroupVO>> getDeviceInGroup(int groupId,int page ,int size){
+    return deviceService.getDeviceInGroup(groupId, page, size);
   }
 
 

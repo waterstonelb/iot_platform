@@ -15,6 +15,10 @@ public class SpaceVisualController {
     @Autowired
     private SpaceVisualInter spaceVisualInter;
 
+    public SpaceVisualController(SpaceVisualInter spaceVisualInter){
+        this.spaceVisualInter=spaceVisualInter;
+    }
+
     @RequestMapping(value={"/getPoint"},method= RequestMethod.POST)
     @ResponseBody
     public List<point> getPoint(){

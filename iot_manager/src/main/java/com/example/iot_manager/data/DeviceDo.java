@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
+import com.example.iot_manager.vo.DeviceGroupVO;
 import com.example.iot_manager.vo.DeviceVO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -49,6 +50,13 @@ public class DeviceDo implements Serializable {
     this.protocol = deviceVO.getProtocol();
     this.ipAddress = deviceVO.getIpAddress();
     this.groupId = deviceVO.getGroupId();
+  }
+  public DeviceGroupVO transfor(){
+    DeviceGroupVO deviceGroupVO = new DeviceGroupVO();
+    deviceGroupVO.setDeviceId(this.deviceId);
+    deviceGroupVO.setName(this.getDeviceName());
+    deviceGroupVO.setUpdateTime(this.updateTime);
+    return deviceGroupVO;
   }
 
 }

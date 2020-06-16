@@ -2,6 +2,7 @@ package com.example.iot_manager.service;
 
 
 import com.example.iot_manager.data.DeviceDo;
+import com.example.iot_manager.vo.DeviceGroupVO;
 import com.example.iot_manager.vo.DeviceVO;
 import com.example.iot_manager.vo.ResponseVO;
 
@@ -26,5 +27,7 @@ public interface DeviceService {
   ResponseVO<DeviceDo> getDeviceById(int deviceId);
 
   ResponseVO<List<DeviceDo>> getDeviceByNameLike(String deviceName, int page, int size);
+
+  ResponseVO<List<DeviceGroupVO>> getDeviceInGroup(int groupId, int page,int size);
 
 }

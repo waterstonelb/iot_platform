@@ -1,7 +1,7 @@
 package com.example.iot_driver.service;
 
+import com.example.iot_driver.FeignVO.TopicPO;
 import com.example.iot_driver.client.IotRuleFeignClient;
-import com.example.iot_driver.vo.TopicPO;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,19 +16,40 @@ public class DataForwarding {
     @Autowired
     private IotRuleFeignClient iotRuleFeignClient;
 
+    public void receiveData(String topic, String message){
+        String[] topicSub = topic.split("/");
+        if (!topicSub[topicSub.length-1].equals("online") &&
+                !topicSub[topicSub.length-1].equals("offline")){
+            if (topicSub[topicSub.length-1].equals("telemetry")){
+                transport(topic,message);
+            }
+        }
+    }
+
     public void transport(String topic, String message){
-        TopicPO topicPO = new TopicPO();
+        try {
+            TopicPO topicPO = new TopicPO();
+            Gson gson = new Gson();
+            Map<String, Object> hashMap = new HashMap<String, Object>();
+            hashMap = gson.fromJson(message, new TypeToken<Map<String, Object>>() {
+            }.getType());
+            System.out.println(hashMap);
 
-        Gson gson = new Gson();
-        Map<String, Object> hashMap = new HashMap<String, Object>();
-        hashMap = gson.fromJson(message, new TypeToken<Map<String, Object>>() {
-        }.getType());
-        System.out.println(hashMap);
-
-        topicPO.setTopic(topic);
-        topicPO.setMap(hashMap);
-
-        System.out.println(iotRuleFeignClient.receiveDataTest(topicPO).toString());
+            Map<String,Object> map = (Map<String, Object>) hashMap.get("properties");
+            topicPO.setTopic(topic);
+            topicPO.setMap(map);
+            System.out.println(topicPO.toString());
+            try {
+                iotRuleFeignClient.receiveData(topicPO);
+                System.out.println("数据传输到iot_rule成功");
+            }catch (Exception e){
+                e.printStackTrace();
+                System.out.println("传输失败");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("message转换topicPO失败");
+        }
     }
 
     public static Map<String,Object> getStringToMap(String str){

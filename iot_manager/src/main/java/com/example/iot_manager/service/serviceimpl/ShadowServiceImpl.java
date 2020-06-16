@@ -21,6 +21,7 @@ public class ShadowServiceImpl implements ShadowService {
     this.shadowRepository = shadowRepository;
   }
 
+  @Override
   public void addShadow(ShadowVO shadowVO) {
     try {
       shadowRepository.save(new ShadowDo(shadowVO));
@@ -29,6 +30,7 @@ public class ShadowServiceImpl implements ShadowService {
     }
   }
 
+  @Override
   @Transactional
   public ResponseVO<String> updateShadow(int shadowId) {
     try{
@@ -42,6 +44,7 @@ public class ShadowServiceImpl implements ShadowService {
     }
   }
 
+  @Override
   public ResponseVO<String> getShadowByDevice(int deviceId) {
     try{
       ShadowDo shadowDo=shadowRepository.findByDeviceId(deviceId);
@@ -54,6 +57,7 @@ public class ShadowServiceImpl implements ShadowService {
     }
   }
 
+  @Override
   @Transactional
   public ResponseVO<String> deleteShadow(int shadowId) {
     try{

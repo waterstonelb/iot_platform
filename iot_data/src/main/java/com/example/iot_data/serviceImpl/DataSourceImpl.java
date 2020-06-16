@@ -1,6 +1,8 @@
 package com.example.iot_data.serviceImpl;
 
 import com.example.iot_data.dao.DataSourceMapper;
+import com.example.iot_data.po.DataTransVO;
+import com.example.iot_data.po.SimpleModelVO;
 import com.example.iot_data.po.deviceData;
 
 import com.example.iot_data.po.deviceDataList;
@@ -11,6 +13,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,22 +24,25 @@ public class DataSourceImpl implements DataSourceInter {
 
     @Override
     public int addDeviceData(deviceDataList data){
-        List<deviceData> newList=data.getList();
+        List<DataTransVO> newList=data.getList();
         int count=0;
 
         if(newList!=null) {
 
             for (int i = 0; i < newList.size(); i++) {
-                String name = newList.get(i).getName();
-                int id = newList.get(i).getId();
-                String time=newList.get(i).getTime();
+                DataTransVO dvo=newList.get(i);
+                String name = dvo.getName();
+                int id = dvo.getId();
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String time = formatter.format(dvo.getTime());
                 String ip=newList.get(i).getIp();
                 List<deviceData> indexList = dataSourceMapper.getDeviceData(id,name,time,ip);
                 if (indexList.size() != 0) { //有重复的数据
                     continue;
                 } else { //没有重复的数据，可以添加数据
-                    double temp=newList.get(i).getTemperature();
-                    double press=newList.get(i).getPress();
+                    List<SimpleModelVO> models=dvo.getModelVOs();
+                    double temp=models.get(0).getNum();
+                    double press=models.get(1).getNum();
                     count++;
                     dataSourceMapper.addDeviceData(id,name,temp,press,time,ip);
                 }

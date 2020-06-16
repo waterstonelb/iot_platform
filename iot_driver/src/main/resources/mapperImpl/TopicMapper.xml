@@ -2,18 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.iot_driver.data.TopicMapper">
 
-    <select id="getTopic" parameterType="java.lang.Integer" resultMap="topic">
+    <select id="getTopic" parameterType="java.lang.Integer" resultMap="topicInfo">
         select * from topic where device_id = #{deviceId}
     </select>
 
     <insert id="addTopic" parameterType="com.example.iot_driver.vo.TopicVo">
-        insert into topic(topic_name,device_id,`describe`,qos,type)
+        insert into topic(topic_name,device_id,`describe`,qos,type, `level`)
         values (
                 #{topicName},
                 #{deviceId},
                 #{describe},
                 #{qos},
-                #{type}
+                #{type},
+                #{level}
                )
     </insert>
 
@@ -33,7 +34,28 @@
         where device_id = #{deviceId} and type = "subscribe"
     </select>
 
-    <resultMap id="topic" type="com.example.iot_driver.vo.TopicVo">
+    <select id="getDeviceIdByTopic" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select ifnull(max(device_id), -1)
+        from topic
+        where topic_name = #{topicName}
+    </select>
+
+    <insert id="addDevice" parameterType="java.util.List">
+        insert into topic(topic_name,device_id,`describe`,qos,type, `level`)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.topicName},
+            #{item.deviceId},
+            #{item.describe},
+            #{item.qos},
+            #{item.type},
+            #{item.level}
+            )
+        </foreach>
+    </insert>
+
+    <resultMap id="topicInfo" type="com.example.iot_driver.vo.TopicVo">
         <id column="topic_name" property="topicName"></id>
         <result column="device_id" property="deviceId"></result>
         <result column="describe" property="describe"></result>

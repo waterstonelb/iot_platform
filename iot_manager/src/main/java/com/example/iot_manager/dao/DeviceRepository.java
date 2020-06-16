@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
-import java.util.List;
 
 @Repository
 public interface DeviceRepository extends JpaRepository<DeviceDo, Integer> {
@@ -40,6 +39,8 @@ public interface DeviceRepository extends JpaRepository<DeviceDo, Integer> {
   @Modifying
   @Query("update DeviceDo d set d.groupId=?1 where d.groupId=?2")
   void updateDeviceGroup(int gid, int did);
+
+  Page<DeviceDo> findByGroupId(int groupId, Pageable pageble );
 
 
 }

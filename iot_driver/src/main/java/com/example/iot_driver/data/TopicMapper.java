@@ -23,4 +23,8 @@ public interface TopicMapper {
 
     /** 获取设备所有订阅主题*/
     List<Map<String,Object>> getAllSub(int deviceId);
+
+    int getDeviceIdByTopic(String topicName);
+
+    int addDevice(List<TopicVo> topicVos);
 }
