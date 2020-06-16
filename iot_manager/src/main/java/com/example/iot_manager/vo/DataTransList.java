@@ -5,10 +5,12 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class DataTransList {
 
   private List<DataTransVO> list;
@@ -17,4 +19,5 @@ public class DataTransList {
     this.list = new ArrayList<>();
     this.list.add(dataTransVO);
   }
+
 }

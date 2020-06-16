@@ -6,6 +6,7 @@ import com.example.iot_manager.vo.DataTransList;
 import com.example.iot_manager.vo.DataTransVO;
 import com.example.iot_manager.vo.ResponseVO;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @CrossOrigin
 @RestController
 @RequestMapping("/dt")
@@ -37,8 +39,9 @@ public class ManagerController {
     /*
     向data service传递数据
      */
-
-    serviceClient.addDevicedata(new DataTransList(managerService.setAttr(dataTransVO)));
+    DataTransList transList = new DataTransList(managerService.setAttr(dataTransVO));
+    log.info(transList.toString());
+    serviceClient.addDevicedata(transList);
     return ResponseVO.buildSuccess("success");
   }
 
