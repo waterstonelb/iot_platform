@@ -15,7 +15,7 @@ public class DataTransVO {
 
   private Integer id;
 
-  private List<SimpleModelVO> modelVOS;
+  private List<SimpleModelVO> modelVOs;
 
   @JsonIgnoreProperties
   private String name;

@@ -1,6 +1,5 @@
 package com.example.iot_manager.vo;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,10 +11,9 @@ public class SimpleModelVO {
 
   private int modelId;
 
-  @JsonIgnoreProperties
   private String name;
 
-  private int num;
+  private double num;
 
 
 

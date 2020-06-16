@@ -4,6 +4,7 @@ import com.example.iot_manager.dao.GroupRepository;
 import com.example.iot_manager.data.GroupDo;
 import com.example.iot_manager.service.GroupService;
 import com.example.iot_manager.vo.GroupVO;
+import com.example.iot_manager.vo.PageResult;
 import com.example.iot_manager.vo.ResponseVO;
 import java.util.List;
 import javax.transaction.Transactional;
@@ -51,11 +52,11 @@ public class GroupServiceImpl implements GroupService {
   }
 
   @Override
-  public ResponseVO<List<GroupDo>> getAllGroup(int page, int size) {
+  public ResponseVO<PageResult<GroupDo>> getAllGroup(int page, int size) {
     try{
       PageRequest pageRequest=PageRequest.of(page, size);
       Page<GroupDo> groupDoPage=groupRepository.findAll(pageRequest);
-      return ResponseVO.buildSuccess(groupDoPage.getContent());
+      return ResponseVO.buildSuccess(PageResult.createPageResult(groupDoPage.getContent(),groupDoPage.getTotalElements()));
     }catch (Exception e){
       e.printStackTrace();
       return ResponseVO.buildFailure("Fail");

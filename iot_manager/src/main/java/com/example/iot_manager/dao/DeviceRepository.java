@@ -29,7 +29,7 @@ public interface DeviceRepository extends JpaRepository<DeviceDo, Integer> {
   void updateGroup(int groupId, int deviceId);
 
   @Modifying
-  @Query("update DeviceDo d set d.isOnline=?1 where d.deviceId= ?2 and d.onlineTime=?3")
+  @Query("update DeviceDo d set d.isOnline=?1, d.onlineTime=?3 where d.deviceId= ?2 ")
   void updateIsOnline(int isonline, int id, Date onlineTime);
 
   @Modifying

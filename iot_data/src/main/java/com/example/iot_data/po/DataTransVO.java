@@ -2,6 +2,7 @@ package com.example.iot_data.po;
 
 import java.util.Date;
 import java.util.List;
+import lombok.ToString;
 
 public class DataTransVO {
     private int id;

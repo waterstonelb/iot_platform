@@ -1,5 +1,7 @@
 package com.example.iot_data.po;
 
+import lombok.ToString;
+
 public class SimpleModelVO {
     private int modelId;
     private String name;

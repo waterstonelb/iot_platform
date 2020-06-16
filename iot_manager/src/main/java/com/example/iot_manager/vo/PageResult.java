@@ -1,6 +1,5 @@
 package com.example.iot_manager.vo;
 
-import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,16 +7,14 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-public class DataTransList {
+public class PageResult<T> {
+  private Long totalNum;
+  private List<T> result;
 
-  private List<DataTransVO> list;
-
-  public DataTransList(DataTransVO dataTransVO){
-    this.list = new ArrayList<>();
-    this.list.add(dataTransVO);
+  public static <T> PageResult<T> createPageResult(List<T> result, Long totalNum){
+    return new PageResult<>(totalNum, result);
   }
-
 }

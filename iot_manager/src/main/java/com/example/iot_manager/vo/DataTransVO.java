@@ -6,23 +6,22 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class DataTransVO {
 
   private Integer id;
 
-  private List<SimpleModelVO> modelVOS;
+  private List<SimpleModelVO> modelVOs;
 
-  @JsonIgnoreProperties
   private String name;
 
-  @JsonIgnoreProperties
   private Date time;
 
-  @JsonIgnoreProperties
   private String ip;
 
 }

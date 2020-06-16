@@ -3,6 +3,7 @@ package com.example.iot_manager.controller;
 import com.example.iot_manager.data.GroupDo;
 import com.example.iot_manager.service.GroupService;
 import com.example.iot_manager.vo.GroupVO;
+import com.example.iot_manager.vo.PageResult;
 import com.example.iot_manager.vo.ResponseVO;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
@@ -49,7 +50,7 @@ public class GroupController {
 
   @ApiOperation("获取全部组")
   @GetMapping("/getall")
-  public ResponseVO<List<GroupDo>> getAllGroup(int page, int size){
+  public ResponseVO<PageResult<GroupDo>> getAllGroup(int page, int size){
     return groupService.getAllGroup(page, size);
   }
 
