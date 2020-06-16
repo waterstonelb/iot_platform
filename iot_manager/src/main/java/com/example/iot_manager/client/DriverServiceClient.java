@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @FeignClient("iot-driver")
 public interface DriverServiceClient {
 
-  @PostMapping("/add")
+  @PostMapping("/addDevice")
   String addDevice(SimpleDeviceVO simpleDeviceVO);
 }
