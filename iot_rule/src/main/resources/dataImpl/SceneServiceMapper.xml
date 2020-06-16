@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.iot_rule.sceneService.mapper.SceneServiceMapper">
+    <insert id="addScene" useGeneratedKeys="true" keyProperty="id" parameterType="com.example.iot_rule.sceneService.vo.SceneFormVO">
+        insert into scene(device_id,`condition`,action,create_time)
+        values(#{deviceId},#{condition},#{action},current_timestamp)
+    </insert>
+</mapper>
+
+

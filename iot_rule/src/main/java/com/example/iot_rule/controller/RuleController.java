@@ -67,7 +67,6 @@ public class RuleController {
     @ApiOperation(value = "接收设备上传的数据测试接口（cp用这个）",notes = "给cp测试用的")
     @PostMapping("/dataTest")
     public ResponseEntity<TopicPO> receiveDataTest(@RequestBody TopicPO topicPO){
-
         return new ResponseEntity<TopicPO>(topicPO);
     }
 

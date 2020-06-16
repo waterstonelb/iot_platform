@@ -139,7 +139,7 @@ public class RuleServiceImpl implements RuleService {
             }else if(condition.contains(">")){
                 String [] strArr=condition.split(">");
                 if(topicPO.getMap().containsKey(strArr[0])){
-                    if((Double)topicPO.getMap().get(strArr[0])>Double.parseDouble(strArr[1])){
+                    if((Integer)topicPO.getMap().get(strArr[0])>Integer.parseInt(strArr[1])){
                         TopicVO topicVO=new TopicVO();
                         topicVO.setRuleId(rulePO.getId());
                         topicVO.setMap(topicPO.getMap());
@@ -150,7 +150,7 @@ public class RuleServiceImpl implements RuleService {
             }else if(condition.contains("<")){
                 String [] strArr=condition.split("<");
                 if(topicPO.getMap().containsKey(strArr[0])){
-                    if((Double)topicPO.getMap().get(strArr[0])<Double.parseDouble(strArr[1])){
+                    if((Integer)topicPO.getMap().get(strArr[0])<Integer.parseInt(strArr[1])){
                         TopicVO topicVO=new TopicVO();
                         topicVO.setRuleId(rulePO.getId());
                         topicVO.setMap(topicPO.getMap());
