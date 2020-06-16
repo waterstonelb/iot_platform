@@ -16,13 +16,10 @@ public class DataTransVO {
 
   private List<SimpleModelVO> modelVOS;
 
-  @JsonIgnoreProperties
   private String name;
 
-  @JsonIgnoreProperties
   private Date time;
 
-  @JsonIgnoreProperties
   private String ip;
 
 }

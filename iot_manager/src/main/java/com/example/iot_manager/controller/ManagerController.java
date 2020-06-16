@@ -2,6 +2,7 @@ package com.example.iot_manager.controller;
 
 import com.example.iot_manager.client.DataServiceClient;
 import com.example.iot_manager.service.ManagerService;
+import com.example.iot_manager.vo.DataTransList;
 import com.example.iot_manager.vo.DataTransVO;
 import com.example.iot_manager.vo.ResponseVO;
 import io.swagger.annotations.ApiOperation;
@@ -36,7 +37,8 @@ public class ManagerController {
     /*
     向data service传递数据
      */
-    serviceClient.addDevicedata(managerService.setAttr(dataTransVO));
+
+    serviceClient.addDevicedata(new DataTransList(managerService.setAttr(dataTransVO)));
     return ResponseVO.buildSuccess("success");
   }
 
