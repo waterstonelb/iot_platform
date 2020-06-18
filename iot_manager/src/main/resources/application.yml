@@ -27,7 +27,9 @@ eureka:
   instance:
     prefer-ip-address: true
     ip-address: 123.56.253.41
-    non-secure-port: 8100
+    non-secure-port: ${server.port}
+    hostname: ${eureka.instance.ip-address}
+    instance-id: ${eureka.instance.ip-address}:${server.port}
 #eureka:
 #  client:
 #    serviceUrl:
