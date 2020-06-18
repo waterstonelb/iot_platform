@@ -31,6 +31,7 @@ public class ModelServiceImpl implements ModelService {
     try{
       ModelDo modelDo=new ModelDo();
       modelDo.setModelVO(modelVO);
+      modelRepository.save(modelDo);
       return ResponseVO.buildSuccess("Success");
     }catch (Exception e){
       e.printStackTrace();
