@@ -17,7 +17,7 @@ import java.util.Date;
 @Getter
 public class ScenePO {
     private int id;
-    private int rule_id;
+    private int ruleId;
     private int deviceId;//绑定的设备id,比如温度报警器
     private String condition;
     private String action;
