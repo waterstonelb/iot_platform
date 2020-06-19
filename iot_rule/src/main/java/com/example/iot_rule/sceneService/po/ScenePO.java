@@ -3,6 +3,8 @@ package com.example.iot_rule.sceneService.po;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 /**
  * Name:
  * DESCRIPTION:
@@ -19,4 +21,5 @@ public class ScenePO {
     private int deviceId;//绑定的设备id,比如温度报警器
     private String condition;
     private String action;
+    private Date createTime;
 }
