@@ -1,11 +1,18 @@
 package com.example.iot_rule.sceneService.Impl;
 
+import com.example.iot_rule.ruleService.vo.PageRequest;
 import com.example.iot_rule.ruleService.vo.ResponseEntity;
 import com.example.iot_rule.sceneService.SceneService;
 import com.example.iot_rule.sceneService.mapper.SceneServiceMapper;
+import com.example.iot_rule.sceneService.po.ScenePO;
 import com.example.iot_rule.sceneService.vo.SceneFormVO;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.List;
 
 /**
  * Name:
@@ -30,5 +37,10 @@ public class SceneServiceImpl implements SceneService {
             msg="添加失败";
         }
         return new ResponseEntity<>(null,msg);
+    }
+
+    @Override
+    public ResponseEntity<List<ScenePO>> getAllScenes(int id){
+        return new ResponseEntity<>(sceneServiceMapper.getAllScenes(id));
     }
 }

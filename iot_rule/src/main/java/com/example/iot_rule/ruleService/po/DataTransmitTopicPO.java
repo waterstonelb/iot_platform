@@ -20,4 +20,5 @@ public class DataTransmitTopicPO {
     private int ruleId;
     private String targetTopic;
     private Date createTime;
+    private String type;
 }

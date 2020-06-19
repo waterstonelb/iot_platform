@@ -42,4 +42,8 @@ public interface RuleServiceMapper {
 
     int addDataTransmitTopic(DataTransmitTopicPO dataTransmitTopicPO);
 
+    List<DataTransmitHttpPO> getAllDataTransmitHttp(int id);
+
+    List<DataTransmitTopicPO> getAllDataTransmitTopic(int id);
+
 }

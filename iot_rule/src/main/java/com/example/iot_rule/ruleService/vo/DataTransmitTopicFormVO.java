@@ -14,5 +14,6 @@ import lombok.Setter;
 @Setter
 @Getter
 public class DataTransmitTopicFormVO {
+    private int ruleId;
     private String targetTopic;
 }

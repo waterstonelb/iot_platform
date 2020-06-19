@@ -1,5 +1,7 @@
 package com.example.iot_rule.ruleService;
 
+import com.example.iot_rule.ruleService.po.DataTransmitHttpPO;
+import com.example.iot_rule.ruleService.po.DataTransmitTopicPO;
 import com.example.iot_rule.ruleService.po.TopicPO;
 import com.example.iot_rule.ruleService.vo.*;
 import net.sf.jsqlparser.statement.select.Top;
@@ -34,9 +36,13 @@ public interface RuleService {
 
     ResponseEntity<List<TopicVO>> handlerData(TopicPO topicPO);
 
-    ResponseEntity<String> dataTransmitTopic(int id,DataTransmitTopicFormVO dataTransmitTopicFormVO);
+    ResponseEntity<String> dataTransmitTopic(DataTransmitTopicFormVO dataTransmitTopicFormVO);
 
-    ResponseEntity<String> dataTransmitHttp(int id, DataTransmitHttpFormVO dataTransmitHttpFormVO);
+    ResponseEntity<String> dataTransmitHttp(DataTransmitHttpFormVO dataTransmitHttpFormVO);
+
+    ResponseEntity<List<DataTransmitHttpPO>> getAllDataTransmitHttp(int id);
+
+    ResponseEntity<List<DataTransmitTopicPO>> getAllDataTransmitTopic(int id);
 
 
 }

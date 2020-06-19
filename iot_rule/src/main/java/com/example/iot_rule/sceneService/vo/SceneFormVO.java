@@ -14,6 +14,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class SceneFormVO {
+    private int ruleId;
     private int deviceId;
     private String condition;
     private String action;

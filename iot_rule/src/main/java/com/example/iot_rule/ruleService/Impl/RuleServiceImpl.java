@@ -163,12 +163,12 @@ public class RuleServiceImpl implements RuleService {
         return new ResponseEntity<>(topicVOS);
     }
 
-    //todo:转发数据到另一个topic
     @Override
-    public ResponseEntity<String> dataTransmitTopic(int id,DataTransmitTopicFormVO dataTransmitTopicFormVO){
+    public ResponseEntity<String> dataTransmitTopic(DataTransmitTopicFormVO dataTransmitTopicFormVO){
         DataTransmitTopicPO dataTransmitTopicPO=new DataTransmitTopicPO();
-        dataTransmitTopicPO.setRuleId(id);
+        dataTransmitTopicPO.setRuleId(dataTransmitTopicFormVO.getRuleId());
         dataTransmitTopicPO.setTargetTopic(dataTransmitTopicFormVO.getTargetTopic());
+        dataTransmitTopicPO.setType("TOPIC");
         int x=ruleServiceMapper.addDataTransmitTopic(dataTransmitTopicPO);
         String msg="";
         if(x==1){
@@ -180,11 +180,11 @@ public class RuleServiceImpl implements RuleService {
     }
 
     @Override
-    public ResponseEntity<String> dataTransmitHttp(int id, DataTransmitHttpFormVO dataTransmitHttpFormVO){
-        RulePO rulePO=ruleServiceMapper.getRuleById(id);
+    public ResponseEntity<String> dataTransmitHttp(DataTransmitHttpFormVO dataTransmitHttpFormVO){
         DataTransmitHttpPO dataTransmitHttpPO=new DataTransmitHttpPO();
-        dataTransmitHttpPO.setRuleId(id);
+        dataTransmitHttpPO.setRuleId(dataTransmitHttpFormVO.getRuleId());
         dataTransmitHttpPO.setTransmitAddress(dataTransmitHttpFormVO.getHttpInterface());
+        dataTransmitHttpPO.setType("HTTP");
         int x=ruleServiceMapper.addDataTransmitHttp(dataTransmitHttpPO);
         String msg="";
         if(x==1){
@@ -195,10 +195,15 @@ public class RuleServiceImpl implements RuleService {
         return new ResponseEntity<>(null,msg);
     }
 
+    @Override
+    public ResponseEntity<List<DataTransmitHttpPO>> getAllDataTransmitHttp(int id){
+        return new ResponseEntity<>(ruleServiceMapper.getAllDataTransmitHttp(id));
+    }
 
-
-
-
+    @Override
+    public ResponseEntity<List<DataTransmitTopicPO>> getAllDataTransmitTopic(int id){
+        return new ResponseEntity<>(ruleServiceMapper.getAllDataTransmitTopic(id));
+    }
 
 
     private boolean isDigit(String str){

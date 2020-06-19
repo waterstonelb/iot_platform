@@ -20,4 +20,6 @@ public class DataTransmitHttpPO {
     private int ruleId;
     private String transmitAddress;
     private Date createTime;
+    private String type;
+
 }

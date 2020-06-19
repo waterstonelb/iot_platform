@@ -1,6 +1,8 @@
 package com.example.iot_rule.controller;
 
 import com.example.iot_rule.ruleService.RuleService;
+import com.example.iot_rule.ruleService.po.DataTransmitHttpPO;
+import com.example.iot_rule.ruleService.po.DataTransmitTopicPO;
 import com.example.iot_rule.ruleService.po.TopicPO;
 import com.example.iot_rule.ruleService.vo.*;
 import io.swagger.annotations.ApiOperation;
@@ -79,14 +81,26 @@ public class RuleController {
 
     @ApiOperation(value = "为规则引擎配置数据转发",notes = "转发数据到另一个Topic")
     @PostMapping("/dataTransmitTopic")
-    public ResponseEntity<String> dataTransmitTopic(int id,@RequestBody DataTransmitTopicFormVO dataTransmitTopicFormVO){
-        return ruleService.dataTransmitTopic(id,dataTransmitTopicFormVO);
+    public ResponseEntity<String> dataTransmitTopic(@RequestBody DataTransmitTopicFormVO dataTransmitTopicFormVO){
+        return ruleService.dataTransmitTopic(dataTransmitTopicFormVO);
     }
 
     @ApiOperation(value = "为规则引擎配置数据转发",notes = "转发数据到HTTP接口")
     @PostMapping("/dataTransmitHttp")
-    public ResponseEntity<String> dataTransmitHttp(int id, @RequestBody DataTransmitHttpFormVO dataTransmitHttpFormVO){
-        return ruleService.dataTransmitHttp(id,dataTransmitHttpFormVO);
+    public ResponseEntity<String> dataTransmitHttp( @RequestBody DataTransmitHttpFormVO dataTransmitHttpFormVO){
+        return ruleService.dataTransmitHttp(dataTransmitHttpFormVO);
+    }
+
+    @ApiOperation(value = "根据id查看所有http规则引擎")
+    @GetMapping("/allDataTransmitHttp")
+    public ResponseEntity<List<DataTransmitHttpPO>> getAllDataTransmitHttp(int id){
+        return ruleService.getAllDataTransmitHttp(id);
+    }
+
+    @ApiOperation(value = "根据id查看所有topic规则引擎")
+    @GetMapping("/allDataTransmitTopic")
+    public ResponseEntity<List<DataTransmitTopicPO>> getAllDataTransmitTopic(int id){
+        return ruleService.getAllDataTransmitTopic(id);
     }
 
 

@@ -1,7 +1,12 @@
 package com.example.iot_rule.sceneService;
 
+import com.example.iot_rule.ruleService.vo.PageRequest;
 import com.example.iot_rule.ruleService.vo.ResponseEntity;
+import com.example.iot_rule.sceneService.po.ScenePO;
 import com.example.iot_rule.sceneService.vo.SceneFormVO;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.List;
 
 /**
  * Name:
@@ -14,4 +19,6 @@ import com.example.iot_rule.sceneService.vo.SceneFormVO;
 public interface SceneService {
 
     ResponseEntity<String> addScene(SceneFormVO sceneFormVO);
+
+    ResponseEntity<List<ScenePO>> getAllScenes(int id);
 }

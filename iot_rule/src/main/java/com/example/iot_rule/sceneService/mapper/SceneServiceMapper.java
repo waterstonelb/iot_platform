@@ -1,8 +1,11 @@
 package com.example.iot_rule.sceneService.mapper;
 
+import com.example.iot_rule.sceneService.po.ScenePO;
 import com.example.iot_rule.sceneService.vo.SceneFormVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * Name:
@@ -17,5 +20,7 @@ import org.springframework.stereotype.Component;
 public interface SceneServiceMapper {
 
     int addScene(SceneFormVO sceneFormVO);
+
+    List<ScenePO> getAllScenes(int id);
 
 }

@@ -1,11 +1,15 @@
 package com.example.iot_rule.controller;
 
+import com.example.iot_rule.ruleService.vo.PageRequest;
 import com.example.iot_rule.ruleService.vo.ResponseEntity;
 import com.example.iot_rule.sceneService.SceneService;
+import com.example.iot_rule.sceneService.po.ScenePO;
 import com.example.iot_rule.sceneService.vo.SceneFormVO;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Name:
@@ -29,5 +33,11 @@ public class SceneController {
     @PostMapping("/addScene")
     public ResponseEntity<String> addScene(@RequestBody SceneFormVO sceneFormVO){
         return sceneService.addScene(sceneFormVO);
+    }
+
+    @ApiOperation(value = "列出所有场景联动")
+    @GetMapping("/allScenes")
+    public ResponseEntity<List<ScenePO>> getAllScenes(int id){
+        return sceneService.getAllScenes(id);
     }
 }

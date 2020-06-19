@@ -53,6 +53,18 @@
         values(#{ruleId},#{targetTopic},current_timestamp)
     </insert>
 
+    <select id="getAllDataTransmitHttp" resultType="com.example.iot_rule.ruleService.po.DataTransmitHttpPO">
+        select * from http_transmit
+        where rule_id=#{id}
+        order by id
+    </select>
+
+    <select id="getAllDataTransmitTopic" resultType="com.example.iot_rule.ruleService.po.DataTransmitTopicPO">
+        select * from topic_transmit
+        where rule_id=#{id}
+        order by id
+    </select>
+
 </mapper>
 
 

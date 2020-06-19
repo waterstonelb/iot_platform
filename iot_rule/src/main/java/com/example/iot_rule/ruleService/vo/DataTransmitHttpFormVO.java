@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DataTransmitHttpFormVO {
+    private int ruleId;
     private String httpInterface;
 
 }
