@@ -26,3 +26,13 @@ eureka:
       defaultZone: http://101.200.189.184:9990/eureka/
   instance:
     prefer-ip-address: true
+    ip-address: 123.56.253.41
+    non-secure-port: ${server.port}
+    hostname: ${eureka.instance.ip-address}
+    instance-id: ${eureka.instance.ip-address}:${server.port}
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://localhost:9990/eureka/
+#  instance:
+#    prefer-ip-address: true

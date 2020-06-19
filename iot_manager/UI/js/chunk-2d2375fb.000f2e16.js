@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d2375fb"],{fb9b:function(e,n,t){"use strict";t.r(n);var a=function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("div",[t("router-view")],1)},r=[],u={name:"GroupManageContainer"},o=u,c=t("2877"),i=Object(c["a"])(o,a,r,!1,null,"2714a3b3",null);n["default"]=i.exports}}]);
+//# sourceMappingURL=chunk-2d2375fb.000f2e16.js.map

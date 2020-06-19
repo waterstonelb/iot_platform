@@ -59,6 +59,7 @@ public class ModelDo implements Serializable {
     this.dataType = modelVO.getDataType();
     this.dataLen = modelVO.getDataLen();
     this.dataMin = modelVO.getDataMin();
+    this.dataUnit = modelVO.getDataUnit();
     this.dataMax = modelVO.getDataMax();
     this.modelDescription = modelVO.getModelDescription();
     this.serviceName = modelVO.getServiceName();
