@@ -7,7 +7,7 @@ spring:
     name: iot-rule
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://101.200.189.184:3306/iotTest?serverTimezone=CTT&characterEncoding=UTF-8
+    url: jdbc:mysql://101.200.189.184:3306/iot?serverTimezone=CTT&characterEncoding=UTF-8
     username: root
     password: root
 
@@ -25,6 +25,7 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://101.200.189.184:9990/eureka/
+#      defaultZone: http://localhost:9990/eureka/
   instance:
     prefer-ip-address: true
     ip-address: 101.200.189.184

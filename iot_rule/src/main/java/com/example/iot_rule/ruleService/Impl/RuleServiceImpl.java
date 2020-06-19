@@ -1,11 +1,8 @@
 package com.example.iot_rule.ruleService.Impl;
 
 import com.example.iot_rule.ruleService.mapper.RuleServiceMapper;
-import com.example.iot_rule.ruleService.po.DataTransmitHttpPO;
-import com.example.iot_rule.ruleService.po.DataTransmitTopicPO;
-import com.example.iot_rule.ruleService.po.RulePO;
+import com.example.iot_rule.ruleService.po.*;
 import com.example.iot_rule.ruleService.RuleService;
-import com.example.iot_rule.ruleService.po.TopicPO;
 import com.example.iot_rule.ruleService.vo.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -14,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Name:
@@ -160,7 +154,22 @@ public class RuleServiceImpl implements RuleService {
                 }
             }
         }
+        for(TopicVO topicVO:topicVOS){
+            ReceivedData receivedData=new ReceivedData();
+            receivedData.setMap(topicVO.getMap().toString());
+            receivedData.setRuleId(topicVO.getRuleId());
+            Date date=new Date();
+            receivedData.setCaptureTime(date);
+            ruleServiceMapper.addData(receivedData);
+        }
         return new ResponseEntity<>(topicVOS);
+    }
+
+    @Override
+    public ResponseEntity<List<ReceivedData>> getAllData(@RequestBody PageRequest pageRequest){
+        PageHelper.startPage(pageRequest.getPageNum(), pageRequest.getPageSize());
+        PageInfo<ReceivedData> receivedDataPageInfo=new PageInfo<>(ruleServiceMapper.getAllData());
+        return ResponseEntity.PageTool(receivedDataPageInfo);
     }
 
     @Override

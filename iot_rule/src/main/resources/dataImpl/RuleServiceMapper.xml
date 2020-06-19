@@ -65,6 +65,16 @@
         order by id
     </select>
 
+    <select id="getAllData" resultType="com.example.iot_rule.ruleService.po.ReceivedData">
+        select * from received_data
+        order by id
+    </select>
+
+    <insert id="addData" useGeneratedKeys="true" keyProperty="id" parameterType="com.example.iot_rule.ruleService.po.ReceivedData">
+        insert into received_data(rule_id,map,capture_time)
+        values(#{ruleId},#{map},#{captureTime})
+    </insert>
+
 </mapper>
 
 

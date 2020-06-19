@@ -3,6 +3,7 @@ package com.example.iot_rule.controller;
 import com.example.iot_rule.ruleService.RuleService;
 import com.example.iot_rule.ruleService.po.DataTransmitHttpPO;
 import com.example.iot_rule.ruleService.po.DataTransmitTopicPO;
+import com.example.iot_rule.ruleService.po.ReceivedData;
 import com.example.iot_rule.ruleService.po.TopicPO;
 import com.example.iot_rule.ruleService.vo.*;
 import io.swagger.annotations.ApiOperation;
@@ -77,6 +78,12 @@ public class RuleController {
     public ResponseEntity<List<TopicVO>> receiveData(@RequestBody TopicPO topicPO){
 
         return ruleService.handlerData(topicPO);
+    }
+
+    @ApiOperation(value = "获取所有规则引擎过滤后的数据")
+    @PostMapping("/allData")
+    public ResponseEntity<List<ReceivedData>> getAllData(@RequestBody PageRequest pageRequest){
+        return ruleService.getAllData(pageRequest);
     }
 
     @ApiOperation(value = "为规则引擎配置数据转发",notes = "转发数据到另一个Topic")

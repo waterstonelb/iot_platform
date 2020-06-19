@@ -2,6 +2,7 @@ package com.example.iot_rule.ruleService;
 
 import com.example.iot_rule.ruleService.po.DataTransmitHttpPO;
 import com.example.iot_rule.ruleService.po.DataTransmitTopicPO;
+import com.example.iot_rule.ruleService.po.ReceivedData;
 import com.example.iot_rule.ruleService.po.TopicPO;
 import com.example.iot_rule.ruleService.vo.*;
 import net.sf.jsqlparser.statement.select.Top;
@@ -35,6 +36,8 @@ public interface RuleService {
     ResponseEntity<String> endRule(int id);
 
     ResponseEntity<List<TopicVO>> handlerData(TopicPO topicPO);
+
+    ResponseEntity<List<ReceivedData>> getAllData(@RequestBody PageRequest pageRequest);
 
     ResponseEntity<String> dataTransmitTopic(DataTransmitTopicFormVO dataTransmitTopicFormVO);
 

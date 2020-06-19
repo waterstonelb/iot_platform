@@ -2,6 +2,7 @@ package com.example.iot_rule.ruleService.mapper;
 
 import com.example.iot_rule.ruleService.po.DataTransmitHttpPO;
 import com.example.iot_rule.ruleService.po.DataTransmitTopicPO;
+import com.example.iot_rule.ruleService.po.ReceivedData;
 import com.example.iot_rule.ruleService.po.RulePO;
 import com.example.iot_rule.ruleService.vo.RuleFormVO;
 import com.example.iot_rule.ruleService.vo.RuleVO;
@@ -45,5 +46,9 @@ public interface RuleServiceMapper {
     List<DataTransmitHttpPO> getAllDataTransmitHttp(int id);
 
     List<DataTransmitTopicPO> getAllDataTransmitTopic(int id);
+
+    List<ReceivedData> getAllData();
+
+    int addData(ReceivedData receivedData);
 
 }
